@@ -1,6 +1,7 @@
+import Layout from "./layout/layout"
 
 
-import Layout from './components/layout/layout'
+
 
 function App() {
 

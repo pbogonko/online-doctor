@@ -2,7 +2,7 @@ import signupImg from '../../assets/images/signup.svg'
 import avatar from '../../assets/images/avatar-icon.png'
 import {Link,useNavigate} from 'react-router-dom'
 import { useState } from 'react'
-import uploadImageTocloudinary from '../utils/uploadCloudinary'
+import uploadImageTocloudinary from '../../utils/uploadCloudinary'
 import { BASE_URL } from '../../config'
 import {toast} from 'react-toastify'
 function Signup() {

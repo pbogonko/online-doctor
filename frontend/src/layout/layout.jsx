@@ -1,6 +1,6 @@
 
-import Header from '../Header/Header'
-import Footer from '../footer/Footer'
+import Header from '../components/Header/Header'
+import Footer from '../components/footer/Footer'
 import Router from '../routers/Router'
 
 

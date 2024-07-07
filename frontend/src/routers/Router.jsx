@@ -1,11 +1,11 @@
 
-import Home from '../pages/Home'
-import Services from '../pages/Services'
-import Login from '../pages/Login'
-import Signup from '../pages/Signup'
-import Contact from '../pages/Contact'
-import Doctors from '../pages/Doctors/Doctors'
-import DoctorDetail from '../pages/Doctors/DoctorsDetail'
+import Home from '../components/pages/Home'
+import Services from '../components/pages/Services'
+import Login from '../components/pages/Login'
+import Signup from '../components/pages/Signup'
+import Contact from '../components/pages/Contact'
+import Doctors from '../components/pages/Doctors/Doctors'
+import DoctorDetail from '../components/pages/Doctors/DoctorsDetail'
 import {Routes,Route} from 'react-router-dom'
 function Router() {
   return <Routes>
