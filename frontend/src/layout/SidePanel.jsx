@@ -1,3 +1,4 @@
+import Button from "../components/Button"
 
 function  SidePanel() {
   return (
@@ -25,7 +26,7 @@ function  SidePanel() {
             </li>
           </ul>
         </div>
-        <button className="btn px-2 w-full rounded-md">Appointment</button>
+        <Button className="btn px-2 w-full rounded-md" name='Appointment'/>
     </div>
   )
 }

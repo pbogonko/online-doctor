@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { BsArrowRight } from "react-icons/bs";
-import starIcon from "../../assets/images/Star.png";
+import {starIcon} from '../../assets/images'
 import { Link } from "react-router-dom";
 
 function DoctorCard({ doctor }) {

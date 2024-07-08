@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
-import logo from "../../assets/images/logo.png";
-import userImg from "../../assets/images/avatar-icon.png";
+import {logo,userImg} from '../../assets/images'
 import { NavLink, Link } from "react-router-dom";
 import { BiMenu } from "react-icons/bi";
+import Button from "../../components/Button";
 
 const navLinks = [
   {
@@ -82,9 +82,9 @@ const toggleMenu=()=>(menuRef.current.classList.toggle('show__menu')
               </Link>
             </div>
             <Link to="/login">
-              <button className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]">
-                login
-              </button>
+              <Button className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]" name='login'/>
+                
+              
             </Link>
             <span className="md:hidden" onClick={toggleMenu}>
               <BiMenu className="w-6 h-6 cursor-pointer" />

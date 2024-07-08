@@ -6,16 +6,16 @@
 // import icon03 from "../../assets/images/icon03.png";
 // import featureImg from '../../assets/images/feature-img.png'
 // import videoIcon from '../../assets/images/video-icon.png'
-import {heroImg01,heroImg02,heroImg03,featureImg,icon01,icon02,icon03,videoIcon} from '../../assets/images'
-import DoctorsList from '../DoctorsList/DoctorsList'
-import avatarIcon from '../../assets/images/avatar-icon.png'
-import faqImg from '../../assets/images/faq-img.png'
+import {heroImg01,heroImg02,heroImg03,featureImg,icon01,icon02,icon03,videoIcon,avatarIcon,faqImg} from '../assets/images'
+import DoctorsList from '../layout/DoctorsList/DoctorsList'
+
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
-import About from "../about/About";
+import About from "../pages/about/About";
 import ServiceList from "../services/ServiceList";
-import FaqList from '../FAQ/FaqList';
-import Testiminial from '../Testimonial/Testiminial';
+import FaqList from '../pages/FAQ/FaqList';
+import Testiminial from '../pages/Testimonial/Testiminial';
+import Button from '../components/Button';
 
 function Home() {
   return (
@@ -38,8 +38,9 @@ function Home() {
                   magni voluptates veritatis consectetur labore facilis facere,
                   porro quod animi. Enim, fuga dicta!
                 </p>
-                <button className="btn">request an Appointment</button>
+                <Button className={'btn'} name='request an Appointment'/>
               </div>
+            
               {/* hero counter */}
               <div className="mt-[300px] lg:mt-[70px] flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-[30px]">
                 <div>
@@ -195,7 +196,7 @@ function Home() {
               <li className="text_para">3. view physcians who are accepting new patients, use the online scheduling tool to select a appointment time</li>
             </ul>
             <Link to='/'>
-            <button className="btn">Learn more</button>
+            <Button className="btn" name='Learn more'/>
             </Link>
       
           </div>

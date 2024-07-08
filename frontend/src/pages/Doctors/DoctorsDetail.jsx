@@ -1,10 +1,8 @@
 import { useState } from 'react'
-import starIcon from '../../../assets/images/Star.png'
-import doctorImg
-  from '../../../assets/images/doctor-img02.png'
+import { starIcon,doctorImg } from '../../assets/images'
 import DoctorsAbout from './DoctorsAbout'
 import DoctorFeedback from './DoctorFeedback'
-import SidePanel from './SidePanel'
+import SidePanel from '../../layout/SidePanel'
 function DoctorsDetail() {
   const [tab ,setTab]=useState('about')
   return (

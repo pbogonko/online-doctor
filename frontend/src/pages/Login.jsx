@@ -1,5 +1,7 @@
 import { useState } from "react"
 import {Link} from 'react-router-dom'
+import Button from "../components/Button"
+import Input from "../components/input"
 
 function Login() {
   const [formData,setFormData]=useState({
@@ -17,9 +19,9 @@ function Login() {
         </h3>
         <form action="" className="py-4">
           <div className="mb-4">
-            <input
+            <Input
               type="email"
-              placeholder="enter your email"
+              placeHolder="enter your email"
               name="email"
               value={formData.email}
               onChange={handleInputChange}
@@ -28,23 +30,22 @@ function Login() {
             />
           </div>
           <div className="mb-4">
-            <input
+            <Input
               type="password"
-              placeholder="enter your password"
+              placeHolder="enter your password"
               name="password"
               value={formData.password}
-              onChange={handleInputChange}
+              method={handleInputChange}
               className="w-full px-3 py-2 border border-solid border-gray-300 focus:outline-none focus:border-primaryColor text-[18px] leading-6 text-headingColor placeholder:text-textColor rounded-md shadow-sm"
               required
             />
           </div>
           <div className="mt-6">
-            <button
+            <Button
               type="submit"
               className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-2 shadow-md hover:bg-primaryColor-dark transition duration-300"
-            >
-              Login
-            </button>
+            name='Login'/>
+            
           </div>
           <p className="mt-4 text-textColor text-center">
             Dont have an account?{" "}

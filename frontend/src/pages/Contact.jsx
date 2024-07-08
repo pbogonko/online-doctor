@@ -1,3 +1,6 @@
+import Button from "../components/Button"
+import Input from "../components/input"
+import Textarea from "../components/Textarea"
 
 function Contact() {
   return (
@@ -10,21 +13,21 @@ function Contact() {
   <form action="" className='space-y-8'>
     <div>
       <label htmlFor="email" className='email_label'>Your email</label>
-      <input type="email" name="" id="email" className='form_input mt-1' placeholder='example@gmail.com'/>
+      <Input type="email" name="" id="email" className='form_input mt-1' placeHolder='example@gmail.com'/>
     </div>
     <div>
       <label htmlFor="subject" className='form_label'>Subject</label>
-      <input type="text"
+      <Input type="text"
        name="" id="subject" className='form_input mt-1' placeholder='let us know how we can help you'/>
     </div>
     <div className='sm:col-span-2'>
       <label htmlFor="message" className='form_label'>Your Message</label>
-      <textarea rows='6'
+      <Textarea rows='6'
        type='text' 
        id="message"
-       className='form_input mt-1' placeholder='leave a comment...'/>
+       className='form_input mt-1' placeHolder='leave a comment...'/>
     </div>
-    <button type="submit" className='btn rounded sm:w-fit'>Submit</button>
+    <Button type="submit" className='btn rounded sm:w-fit' name='submit'/>
   </form>
 </div>
     </section>

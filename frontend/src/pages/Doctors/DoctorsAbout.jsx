@@ -1,4 +1,4 @@
-import { FormatDate } from "../../../utils/DateFormat"
+import { FormatDate } from "../../utils/DateFormat"
 
 
 function DoctorsAbout() {

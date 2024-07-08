@@ -1,10 +1,11 @@
-import signupImg from '../../assets/images/signup.svg'
-import avatar from '../../assets/images/avatar-icon.png'
+import {avatar,signupImg} from '../assets/images'
 import {Link,useNavigate} from 'react-router-dom'
 import { useState } from 'react'
-import uploadImageTocloudinary from '../../utils/uploadCloudinary'
-import { BASE_URL } from '../../config'
+import uploadImageTocloudinary from '../utils/uploadCloudinary'
+import { BASE_URL } from '../config'
 import {toast} from 'react-toastify'
+import Button from '../components/Button'
+import Input from '../components/input'
 function Signup() {
   const [selectedFile,setSelectedFile]=useState(null)
   const [previewURL,setpreviewURL]=useState('')
@@ -78,37 +79,37 @@ function Signup() {
             <form action="" 
             onSubmit={submitHandler} className="ml-10">
               <div className="mb-5">
-                <input
+                <Input
                   type="text"
-                  placeholder="Full Name"
+                  placeHolder="Full Name"
                   name="name"
                   autoComplete='on'
                   value={formData.name}
-                  onChange={handleInputChange}
+                  method={handleInputChange}
                   className="w-full max-w-[400px] pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[22px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
                   required
                 />
               </div>
               <div className="mb-5">
-                <input
+                <Input
                   type="email"
-                  placeholder="Enter your email"
+                  placeHolder={"Enter your email"}
                   autoComplete='on'
                   name="email"
                   value={formData.email}
-                  onChange={handleInputChange}
+                  method={handleInputChange}
                   className="w-full max-w-[400px] pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[22px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
                   required
                 />
               </div>
               <div className="mb-5">
-                <input
+                <Input
                   type="password"
-                  placeholder="Enter your password"
+                  placeHolder="Enter your password"
                   autoComplete='on'
                   name="password"
                   value={formData.password}
-                  onChange={handleInputChange}
+                  method={handleInputChange}
           
                   className="w-full max-w-[400px] pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[22px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"
                   required
@@ -166,12 +167,12 @@ function Signup() {
                 </div>
               </div>
               <div className="mt-7">
-                <button
+                <Button
                   type="submit"
                   className="w-[10rem] bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-4"
                 >
                   Register
-                </button>
+                </Button>
               </div>
               <p className="mt-5 text-textColor text-center">
                 Already have an account?{" "}

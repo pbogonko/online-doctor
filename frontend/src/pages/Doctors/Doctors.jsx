@@ -1,7 +1,9 @@
 
-import DoctorCard from './../../DoctorsList/DoctorCard'
-import { doctors } from '../../../assets/data/doctors'
-import Testiminial from '../../Testimonial/Testiminial'
+import DoctorCard from '../../layout/DoctorsList/DoctorCard'
+import { doctors } from '../../assets/data/doctors'
+import Testiminial from '../Testimonial/Testiminial'
+import Button from '../../components/Button'
+
 function Doctors() {
   return (
     <>
@@ -14,7 +16,7 @@ function Doctors() {
           placeholder='search doctor'/>
        
           <div>
-            <button className='bg-blue-600 mt-0 w-[100px] h-[50px] text-white'>Search</button>
+            <Button className='bg-blue-600 mt-0 w-[100px] h-[50px] text-white' name='Search'/>
           </div>
         </div>
       </div>
@@ -38,6 +40,7 @@ function Doctors() {
                 world care for everone. our health system offers unmatched, expert care
               </p>
               </div>
+              
               
           </div>
           <Testiminial/>

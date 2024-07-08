@@ -1,6 +1,6 @@
 
 import ServiceCard from '../services/ServiceCard'
-import {services} from '../../assets/data/services'
+import {services} from '../assets/data/services'
 function Services() {
   return (
   <section>

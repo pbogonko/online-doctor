@@ -3,7 +3,7 @@ import {Pagination} from 'swiper/modules'
 import { Swiper,SwiperSlide} from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import PatientAvatar from '../../assets/images/patient-avatar.png'
+import { PatientAvatar } from '../../assets/images'
 import {HiStar} from  'react-icons/hi'
 function Testiminial() {
   return (

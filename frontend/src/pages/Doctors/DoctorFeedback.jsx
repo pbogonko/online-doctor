@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import avatar from '../../../assets/images/avatar-icon.png';
-import { FormatDate } from '../../../utils/DateFormat';
+import {avatar} from '../../assets/images/index'
+import { FormatDate } from '../../utils/DateFormat';
 import {AiFillStar} from 'react-icons/ai'
 import Feedbackform from './Feedbackform';
+import Button from '../../components/Button';
 
   const DoctorFeedback=()=>{
-   const [showFeedbackForm,setShowFeedbackForm]=useState(false)
+   const [showFeedbackForm,setShowFeedbackForm]=useState(true)
   return (
     <div>
       <div className="mb-[50px]">
@@ -33,7 +34,7 @@ import Feedbackform from './Feedbackform';
         </div>
       </div>
       {!showFeedbackForm && <div className="text-center">
-        <button className="btn" onClick={()=>setShowFeedbackForm(true )}>Give Feedback</button>
+        <Button className="btn" onClick={()=>setShowFeedbackForm(true )} name='give feedback' />
       </div>}
       {showFeedbackForm && <Feedbackform/>}
        

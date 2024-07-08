@@ -1,6 +1,7 @@
  
 import {Link} from 'react-router-dom'
 import { aboutCardImg, aboutImg } from '../../assets/images'
+import Button from '../../components/Button'
 function About() {
   return <section>
     <div className="container">
@@ -23,7 +24,7 @@ function About() {
             </p>
             <p className="text_para mt-[30px]">offering best medica care is something we strive for each day,caring for our patients-not looking at what we have accomplished but what we can do tomorrow.reaching out to all patients who needs us is our goal </p>
             <Link to='/'>
-            <button className='btn'>learn more</button>
+            <Button className='btn' name='Learn more' />
             </Link>
 
             </div>

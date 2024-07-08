@@ -1,8 +1,9 @@
 
-import Header from '../components/Header/Header'
-import Footer from '../components/footer/Footer'
-import Router from '../routers/Router'
 
+import Footer from '../layout/footer/Footer'
+import Header from '../layout/Header/Header'
+
+import Router from '../routers/Router'
 
 function Layout() {
   return (

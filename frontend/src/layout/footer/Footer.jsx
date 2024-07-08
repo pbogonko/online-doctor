@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom'
-  import logo from '../../assets/images/logo.png'
+ import {logo} from '../../assets/images'
   import{AiFillYoutube,AiFillGithub,AiOutlineInstagram,  AiFillLinkedin} from 'react-icons/ai'
 
   const socialLinks=[
@@ -65,7 +65,7 @@ import { Link } from 'react-router-dom'
     },
     {
       path:'/contact',
-      display:'Contacr us'
+      display:'Contact us'
     },
   ]
 function Footer() {

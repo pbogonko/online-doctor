@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { AiFillStar } from "react-icons/ai"
+import Button from "../../components/Button";
+import Textarea from "../../components/Textarea";
 
 function Feedbackform() {
     const [rating,setRating]=useState(0)
@@ -41,10 +43,10 @@ function Feedbackform() {
         <div className="mt-[30px]">
         <h3 className="text-headingColor text-[16px] leading-6 font-semibold mb-4 mt-0">share your feedback or suggestion</h3>
     
-        <textarea className="border border-solid border-[#0066ff34] focus:outline-primaryColor w-full px-4 py-3 rounded-md" id=""
-        onChange={e=>setReview(e.target.value)}></textarea>
+        <Textarea className="border border-solid border-[#0066ff34] focus:outline-primaryColor w-full px-4 py-3 rounded-md" id=""
+        method={e=>setReview(e.target.value)}/>
         </div>
-        <button type='submit' className="btn" onClick={handleSubmitReview}>Submit feedback</button>
+        <Button type='submit' className="btn" onClick={handleSubmitReview} name='Submit Feedback'/>
 
         
 
