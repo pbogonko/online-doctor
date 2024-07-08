@@ -8,5 +8,14 @@ import featureImg from './feature-img.png'
 import videoIcon from './video-icon.png'
 import aboutImg from './about.png'
 import aboutCardImg from './about-card.png'
-
-export {heroImg01,heroImg02,heroImg03,featureImg,icon01,icon02,icon03,videoIcon,aboutImg,aboutCardImg}
+import avatarIcon from './avatar-icon.png'
+import faqImg from './faq-img.png'
+import starIcon from './Star.png'
+import doctorImg
+  from './doctor-img02.png'
+  import signupImg from './signup.svg'
+import avatar from './avatar-icon.png'
+import PatientAvatar from './patient-avatar.png'
+import logo from "./logo.png";
+import userImg from "./avatar-icon.png";
+export {heroImg01,heroImg02,heroImg03,featureImg,icon01,icon02,icon03,videoIcon,aboutImg,aboutCardImg,avatarIcon,faqImg,doctorImg,starIcon,signupImg,avatar,PatientAvatar,logo,userImg}

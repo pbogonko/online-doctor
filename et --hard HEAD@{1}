@@ -1,0 +1,11 @@
+[33m390cc2b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mauthentication-backend[m[33m, [m[1;31morigin/master[m[33m, [m[1;32mmain[m[33m)[m HEAD@{0}: checkout: moving from main to authentication-backend
+[33m390cc2b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mauthentication-backend[m[33m, [m[1;31morigin/master[m[33m, [m[1;32mmain[m[33m)[m HEAD@{1}: checkout: moving from authentication-frontend to main
+[33m449da9e[m[33m ([m[1;31morigin/authentication-frontend[m[33m, [m[1;32mauthentication-frontend[m[33m)[m HEAD@{2}: checkout: moving from main to authentication-frontend
+[33m390cc2b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mauthentication-backend[m[33m, [m[1;31morigin/master[m[33m, [m[1;32mmain[m[33m)[m HEAD@{3}: Branch: renamed refs/heads/main to refs/heads/main
+[33m390cc2b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mauthentication-backend[m[33m, [m[1;31morigin/master[m[33m, [m[1;32mmain[m[33m)[m HEAD@{5}: checkout: moving from authentication-frontend to main
+[33m449da9e[m[33m ([m[1;31morigin/authentication-frontend[m[33m, [m[1;32mauthentication-frontend[m[33m)[m HEAD@{6}: commit: user authentication
+[33m17b6f18[m HEAD@{7}: commit: online doctor
+[33m390cc2b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mauthentication-backend[m[33m, [m[1;31morigin/master[m[33m, [m[1;32mmain[m[33m)[m HEAD@{8}: checkout: moving from main to authentication-frontend
+[33m390cc2b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mauthentication-backend[m[33m, [m[1;31morigin/master[m[33m, [m[1;32mmain[m[33m)[m HEAD@{9}: Branch: renamed refs/heads/master to refs/heads/main
+[33m390cc2b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mauthentication-backend[m[33m, [m[1;31morigin/master[m[33m, [m[1;32mmain[m[33m)[m HEAD@{11}: commit: online doctor
+[33mb57408c[m HEAD@{12}: commit (initial): first commit
