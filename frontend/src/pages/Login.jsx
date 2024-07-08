@@ -24,7 +24,7 @@ function Login() {
               placeHolder="enter your email"
               name="email"
               value={formData.email}
-              onChange={handleInputChange}
+              method={handleInputChange}
               className="w-full px-3 py-2 border border-solid border-gray-300 focus:outline-none focus:border-primaryColor text-[18px] leading-6 text-headingColor placeholder:text-textColor rounded-md shadow-sm"
               required
             />

@@ -6,6 +6,7 @@ import { BASE_URL } from '../config'
 import {toast} from 'react-toastify'
 import Button from '../components/Button'
 import Input from '../components/input'
+import HashLoader from 'react-spinners/HashLoader'
 function Signup() {
   const [selectedFile,setSelectedFile]=useState(null)
   const [previewURL,setpreviewURL]=useState('')
@@ -38,7 +39,7 @@ function Signup() {
   const submitHandler=async (event)=>{ 
     event.preventDefault()
     isLoading(true)
-    navigate('./login')
+    
     try {
       
       const res=await fetch(`${BASE_URL}/api/v1/auth/register`,
@@ -52,13 +53,14 @@ function Signup() {
       )
       const {message}=await res.json
       if(!res.ok){
-        throw Error(message)
+        throw new  Error(message)
       }
       isLoading(false) 
       toast.success(message)
+      navigate('./login')
     } catch (error) {
-
-      
+      toast.error(error.message)
+      isLoading(false)
     }
     // send form data to the server
   }
@@ -146,9 +148,9 @@ function Signup() {
                 </label>
               </div>
               <div className="mb-5 flex items-center gap-3">
-                <figure className="w-[60px] h-[60px] rounded-full border border-solid border-primaryColor flex items-center">
-                  <img src={avatar} className="w-full rounded-full" alt="" />
-                </figure>
+               {selectedFile && <figure className="w-[60px] h-[60px] rounded-full border border-solid border-primaryColor flex items-center">
+                  <img src={previewURL} className="w-full rounded-full" alt="" />
+                </figure>}
                 <div className="relative w-[130px] h-[50px]">
                   <input
                     type="file"
@@ -168,11 +170,13 @@ function Signup() {
               </div>
               <div className="mt-7">
                 <Button
+                  disabled={loading && true}
                   type="submit"
                   className="w-[10rem] bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-4"
-                >
-                  Register
-                </Button>
+                  name=  {loading? <HashLoader size={35} color='#ffffff'/>:'Register'}
+                />
+               
+                
               </div>
               <p className="mt-5 text-textColor text-center">
                 Already have an account?{" "}
