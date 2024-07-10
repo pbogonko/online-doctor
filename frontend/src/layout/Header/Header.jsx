@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import {logo,userImg} from '../../assets/images'
+import { logo,userImg} from '../../assets/images'
 import { NavLink, Link } from "react-router-dom";
 import { BiMenu } from "react-icons/bi";
 import Button from "../../components/Button";
@@ -76,12 +76,32 @@ const toggleMenu=()=>(menuRef.current.classList.toggle('show__menu')
             </ul>
           </div>
           {/* nav right */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            {token && user?
+            <div >
+              <Link to={`${role==='doctor'?'/doctors/profile/me':'/users/profile/me' }`}> 
+                <figure className="w-[30px] h-[30px] rounded-full cursor-pointer">
+                  <img src={user?.photo||userImg} className="w-full rounded-full" alt="img" />
+                </figure>
+                <h2>{user?.name}</h2>
+              </Link>
+            </div>:(
+            <Link to="/login">
+              <Button className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]" name='login'/>
+            
+              
+            </Link>)
+}
+            <span className="md:hidden" onClick={toggleMenu}>
+              <BiMenu className="w-6 h-6 cursor-pointer" />
+            </span>
+          </div>
+          {/* <div className="flex items-center gap-4">
           {token && user? (
             <div>
               <Link to={`${role==='doctor'?'/doctors/profile/me':'/users/profile/me' }`}>
                 <figure className="w-[35px] h-[35px] rounded-full cursor-pointer">
-                  <img src={user?.photo} className="w-full rounded-full" alt="" />
+                  <img src={avatar} className="w-full rounded-full" alt="an image" />
                 </figure>
                 <h2>{user?.name}</h2>
               </Link>
@@ -96,7 +116,7 @@ const toggleMenu=()=>(menuRef.current.classList.toggle('show__menu')
             <span className="md:hidden" onClick={toggleMenu}>
               <BiMenu className="w-6 h-6 cursor-pointer" />
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
     </header>
