@@ -57,7 +57,7 @@ function Signup() {
       }
       isLoading(false) 
       toast.success(message)
-      navigate('./login')
+      navigate('/login')
     } catch (error) {
       toast.error(error.message)
       isLoading(false)

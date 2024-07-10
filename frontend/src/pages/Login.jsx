@@ -1,23 +1,67 @@
-import { useState } from "react"
-import {Link} from 'react-router-dom'
+import { useState,useContext} from "react"
+import {Link,useNavigate} from 'react-router-dom'
 import Button from "../components/Button"
 import Input from "../components/input"
-
+import { BASE_URL } from "../config"
+import { toast } from "react-toastify"
+import { AuthContext } from "../context/authContext.jsx"
+import HashLoader from "react-spinners/HashLoader.js"
 function Login() {
   const [formData,setFormData]=useState({
     email:'',
     password:''
   })
+  const {dispatch}=useContext(AuthContext);
+  const [loading,isLoading]=useState(false)
   const handleInputChange=e=>{
     setFormData({...formData,[e.target.name]:e.target.value})
+  }
+  const navigate=useNavigate();
+
+  const submitHandler=async (event)=>{ 
+    event.preventDefault()
+    isLoading(true)
+    
+    try {
+      
+      const res=await fetch(`${BASE_URL}/api/v1/auth/login`,
+        {
+          method:'post',
+          headers:{
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify(formData)
+        }
+      )
+      const result=await res.json()
+      if(!res.ok){
+        throw new  Error(result.message)
+      }
+      dispatch({
+        type:'LOGIN_SUCCESS',
+        payload:{
+          user:result.data,
+          token:result.token,
+          role:result.role 
+        },
+      });
+      console.log(result,'login data')
+      isLoading(false) 
+      toast.success(result.message)
+      navigate('/home')
+    } catch (error) {
+      toast.error(error.message)
+      isLoading(false)
+    }
+    // send form data to the server
   }
   return (
     <section className="px-5 lg:px-0">
       <div className="w-full max-w-[400px] mx-auto rounded-lg shadow-lg p-8 bg-white">
         <h3 className="text-headingColor text-[22px] leading-9 font-bold mb-6">
-          Hello! <span className="text-primaryColor">welcome</span> back
+          Hello! <span className="text-primaryColor">welcome</span> back 
         </h3>
-        <form action="" className="py-4">
+        <form action="" className="py-4" onSubmit={submitHandler}>
           <div className="mb-4">
             <Input
               type="email"
@@ -43,8 +87,8 @@ function Login() {
           <div className="mt-6">
             <Button
               type="submit"
-              className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-2 shadow-md hover:bg-primaryColor-dark transition duration-300"
-            name='Login'/>
+              className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-2 shadow-md hover:bg-primaryColor-dark transition duration-10"
+            name={loading? <HashLoader size={35} color={'#ffffff'}/>:'Login'}/>
             
           </div>
           <p className="mt-4 text-textColor text-center">

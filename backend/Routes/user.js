@@ -10,5 +10,5 @@ router.get('/',authenticate,restrict(['admin']),getAllUser)
 
 router.put('/:id',authenticate,restrict(['patient']),updateUser)
 
-router.delete('/:id',authenticate,restrict(['admin']),authenticate,restrict(['patien']),deleteUser)
+router.delete('/:id',authenticate,restrict(['admin']),authenticate,restrict(['patient']),deleteUser)
 export default router 
