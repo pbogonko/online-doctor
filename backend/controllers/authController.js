@@ -2,8 +2,11 @@
   import Doctor from '../models/DoctorSchema.js'
   import jwt from 'jsonwebtoken'
   import bcrypt from 'bcryptjs'
+<<<<<<< HEAD
+=======
   import dotenv from 'dotenv'
   dotenv.config()
+>>>>>>> authentication-backend
   const generateToken=user=>{
     return jwt.sign({id:user._id,role:user.role},process.env.JWT_SECRET_KEY,{
       expiresIn:'15d'
@@ -83,7 +86,10 @@ export const login=async (req,res)=>{
       const {password,role,appintments,...rest}=user._doc
       res.status(200).json({status:true,message:'successfully login',token,data:{...rest},role})
       
+<<<<<<< HEAD
+=======
       
+>>>>>>> authentication-backend
         
     } catch (error) {
       console.log(error)

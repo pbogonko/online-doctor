@@ -70,7 +70,11 @@ body {
     position: absolute;
     top: 0;
     right: 0;
+<<<<<<< HEAD
+    background: #be7070;
+=======
     background: #fff;
+>>>>>>> authentication-backend
     z-index: 200;
     flex-direction: column;
     justify-content: center;
