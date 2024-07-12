@@ -1,5 +1,6 @@
 import User from '../models/UserSchema.js'
-
+import Booking from '../models/BookingSchema.js'
+import Doctor from '../models/DoctorSchema.js'
 export const updateUser=async(req,res)=>{
 const id=req.params.id
     try{
@@ -38,3 +39,55 @@ export const deleteUser=async(req,res)=>{
                     res.status(404).json({success:false,message:'not found'})
                 }
             };
+            //get user profile
+            export const getUserProfile=async(req,res)=>{
+                const userId=req.userId
+                try{
+                    const user=await User.findById(userId)
+                    if(!user){
+                        return res.status(404).json({success:false,message:'user not found'})
+
+                    }
+                    const {password,...rest}=user._doc
+                    res.status(200).json({success:true,message:"profile info is getting ready",data:{...rest}})
+
+                    
+
+                }catch(err){
+                    return res.status(404).json({success:false,message:'something went wrong'})
+
+                }
+            }
+            //get user profile
+            export const getdoctorProfile=async(req,res)=>{
+                const doctorId=req.doctorId
+                try{
+                    const doctor =await Doctor.findById(doctorId)
+                    if(!doctor){
+                        return res.status(404).json({success:false,message:'doctor not found'})
+
+                    }
+                    const {password,...rest}=doctor._doc;
+                    const appointment=Booking.find({doctor:doctorId})
+                    res.status(200).json({success:true,message:"profile info is getting ready",data:{...rest}})
+
+                    
+
+                }catch(err){
+                    return res.status(404).json({success:false,message:'something went wrong'})
+
+                }
+            }
+           export  const getMyAppointments=async(req,res)=>{
+                try{
+                    //retrieving appointments for specific user
+                    const bookings=await Booking.find({user:req.userId})
+                    //extract doctor ids from appointment bookings
+                    const doctorids=bookings.map(element=>element.doctor.id)
+                    //retrieve doctors using doctor ids
+                    const doctor=await Doctor.find({_id:{$in:doctorids}}).select('-password')
+                }catch(err){
+                    return res.status(500  ).json({success:false,message:'something went wrong'})
+
+                }
+            }
