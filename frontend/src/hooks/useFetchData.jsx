@@ -12,15 +12,17 @@ import {token } from '../config'
             setLoading(true)
             try{
             const res=await fetch(url,{
-                        headers:{Authorization:`Bearer ${token}`},
+                        headers:{authorization:`Bearer ${token}`},
           
             
              })
          
             const result=await res.json()
             if(!res.ok){
+              
                 throw new Error(result.message+' 🤢')
             }
+            
             
             setData(result.data)
              

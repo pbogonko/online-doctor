@@ -13,18 +13,19 @@ export const authenticate=async (req,res,next)=>{
         return res.status(401).json({success:false,message:'No token,authorization denied'});
     }
     try {
-        const token=authToken.split(" "[1])
+        const token=authToken.split(" ")[1]
         const decoded=jwt.verify(token,process.env.JWT_SECRET_KEY)
-        //verify tok
+        //verify token
         req.userID=decoded.userID
         req.role=decoded.role
+
 
         next();
     } catch (error) {
         if(error.name==='TokenExpiredError'){
             return res.status(401).json({message:'Token is expired'})
         }
-        return res.status(401).json({message:'invalid token'})
+        return res.status(401).json({message:error.message})
     }
 
 }
@@ -38,8 +39,10 @@ export const restrict=roles=>async(req,res,next)=>{
     }
     if(doctor){
         user=doctor
+        
     }
     if(!roles.includes(user.role)){
+       
         return res.status(401).json({success:false, message:"you are not authorized"})
     }
     next()
