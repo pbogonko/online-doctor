@@ -38,9 +38,13 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(cors(corsOptions))
 app.use('/api/v1/auth',authRoute)
+<<<<<<< HEAD
+
+=======
 app.use('/api/v1/users',userRoute)
 app.use('/api/v1/doctors',doctorRoute)
 app.use('/api/v1/reviews',reviewRoute)
+>>>>>>> authentication-backend
 app.listen(port,()=>{
     DBconnection()//connect to the database before starting the server
     console.log(`Server running on port ${port}`)})

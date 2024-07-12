@@ -2,6 +2,7 @@
   import Doctor from '../models/DoctorSchema.js'
   import jwt from 'jsonwebtoken'
   import bcrypt from 'bcryptjs'
+
   import dotenv from 'dotenv'
   dotenv.config()
   const generateToken=user=>{
@@ -80,6 +81,7 @@
         res.status(200).json({status:true,message:'successfully login',token,data:{...rest},role})
       
       
+
       
     }catch(err){
         console.log(err)
@@ -90,4 +92,10 @@
     
 
 
+        
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({status:false,message:'failed to login'})
+        
+    };
   }
