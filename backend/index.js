@@ -53,6 +53,4 @@ app.listen(port,()=>{
 
 
 
-// routes
 
-// Mock data

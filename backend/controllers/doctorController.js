@@ -48,3 +48,24 @@ export const deleteDoctor=async(req,res)=>{
                     res.status(404).json({success:false,message:'not found'})
                 }
             };
+             //get user profile
+             export const getdoctorProfile=async(req,res)=>{
+                const doctorId=req.doctorId
+                try{
+                    const doctor =await Doctor.findById(doctorId)
+                    if(!doctor){
+                        return res.status(404).json({success:false,message:'doctor not found'})
+
+                    }
+                    const {password,...rest}=doctor._doc;
+                    const appointment=Booking.find({doctor:doctorId})
+                    res.status(200).json({success:true,message:"profile info is getting ready",data:{...rest}})
+
+                    
+
+                }catch(err){
+                    return res.status(404).json({success:false,message:'something went wrong'})
+
+                }
+            }
+           
