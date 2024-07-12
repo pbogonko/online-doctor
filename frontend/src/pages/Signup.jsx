@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import {avatar,signupImg} from '../assets/images'
 import {Link,useNavigate} from 'react-router-dom'
 import { useState } from 'react'
@@ -42,7 +43,7 @@ function Signup() {
     
     try {
       
-      const res=await fetch(`${BASE_URL}/api/v1/auth/register`,
+      const res=await fetch(`${BASE_URL}/auth/register`,
         {
           method:'post',
           headers:{

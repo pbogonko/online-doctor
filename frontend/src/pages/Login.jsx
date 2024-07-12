@@ -13,7 +13,7 @@ function Login() {
   })
   const {dispatch}=useContext(AuthContext);
   const [loading,isLoading]=useState(false)
-  const handleInputChange=e=>{
+  const  handleInputChange=e=>{
     setFormData({...formData,[e.target.name]:e.target.value})
   }
   const navigate=useNavigate();
@@ -24,7 +24,7 @@ function Login() {
     
     try {
       
-      const res=await fetch(`${BASE_URL}/api/v1/auth/login`,
+      const res=await fetch(`${BASE_URL}/auth/login`,
         {
           method:'post',
           headers:{
