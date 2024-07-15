@@ -1,5 +1,5 @@
 import Doctor from '../models/DoctorSchema.js'
-
+import Booking from '../models/BookingSchema.js'
 export const updateDoctor=async(req,res)=>{
 const id=req.params.id
     try{
@@ -50,9 +50,12 @@ export const deleteDoctor=async(req,res)=>{
             };
              //get user profile
              export const getdoctorProfile=async(req,res)=>{
-                const doctorId=req.doctorId
+                const doctorId=req.userId
+              
                 try{
                     const doctor =await Doctor.findById(doctorId)
+                    
+                    
                     if(!doctor){
                         return res.status(404).json({success:false,message:'doctor not found'})
 

@@ -9,7 +9,7 @@ import Loading from "../../Loader/Loading"
 import Error from "../../Error/Error"
 function Myaccount() {
 //     const {user}=useContext(AuthContext)
-    const {dispatch,user}=useContext(AuthContext)
+    const {dispatch}=useContext(AuthContext)
      const handleLogout=()=>{
         dispatch({type:'LOGOUT'})
      }
@@ -18,7 +18,7 @@ function Myaccount() {
         loading,error
         }=useFetchData(`${BASE_URL}/users/profile/me`)
      console.log(userData,'userData ')
-     console.log(error)
+   
     
   return(
   <section>
@@ -28,7 +28,7 @@ function Myaccount() {
             loading && !error &&<Loading/>
 
         }
-        {loading && error && <Error errMessage={error}/>}
+        {!loading && error && <Error errMessage={error}/>}
         {
             !loading && !error &&   (
                 <div className="grid md:grid-cols-3 gap-10">
@@ -36,15 +36,15 @@ function Myaccount() {
                     <div className="flex items-center justify-center">
                         <figure className="w-[100px] h-[100px]rounded-full border-2 border-solid border-primaryColor">
                             <img
-                             src={user?.photo||userImg} alt="" className="w-full h-full rounded-full" />
+                             src={userData?.photo||userImg} alt="" className="w-full h-full rounded-full" />
                         </figure>
                     </div>
                     <div className="text-center mt-4">
-                        <h3 className="text-[18px] leading-[30px text-headingColor font-bold" >{user?.name}</h3>
-                        <p className="text-textColor text-[15px] leading-6 font-medium">{user?.email}</p>
+                        <h3 className="text-[18px] leading-[30px text-headingColor font-bold" >{userData?.name}</h3>
+                        <p className="text-textColor text-[15px] leading-6 font-medium">{userData?.email}</p>
                         <p className="text-textColor text-[15px] leading-6 font-medium">
                             Blood Type:
-                            <span className="ml-2 text-headingColor text-[22px] lleading-8">o</span>
+                            <span className="ml-2 text -headingColor text-[22px] lleading-8">{userData.bloodTyp}</span>
                         </p>
                     </div>
                     <div className="mt-[50px] md:mt-[100px]">

@@ -78,9 +78,9 @@ const toggleMenu=()=>(menuRef.current.classList.toggle('show__menu')
           {/* nav right */}
           <div className="flex items-center gap-2">
             {token && user?
-            <div >
+            <div className="user">
               <Link to={`${role==='doctor'?'/doctors/profile/me':'/users/profile/me' }`}> 
-                <figure className="w-[30px] h-[30px] rounded-full cursor-pointer">
+                <figure className="w-[30px] h-[30px] rounded-full cursor-pointer flex flex-row">
                   <img src={user?.photo||userImg} className="w-full rounded-full" alt="img" />
                 </figure>
                 <h2>{user?.name}</h2>
