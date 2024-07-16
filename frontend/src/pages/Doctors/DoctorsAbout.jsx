@@ -8,7 +8,7 @@ function DoctorsAbout({name,experiences,about,qualifications}) {
    
     <div>
         <div>
-            <h3 className="text-[20px] leading-[38px] text-headingColor font-semibold flex items-center gap-2">About of
+            <h3 className="text-[20px] leading-[38px] text-headingColor font-semibold flex items-center gap-2">About 
             <span className="text-irisBlueColor font-bold text-[24px] leading-9">
                {name}
             </span>

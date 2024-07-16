@@ -9,6 +9,7 @@ import Tabs from './Tabs'
 import { useState } from 'react'
 import DoctorsAbout from '../../pages/Doctors/DoctorsAbout'
 import Profile from './Profile'
+import Appointments from './Appointments'
 function Dashboard() {
   const {data,loading,error}=useGetProfile(`${BASE_URL}/doctors/profile/me`)
   console.log(data)
@@ -66,7 +67,7 @@ function Dashboard() {
                     qualifications={data.qualifications} experiences={data.experiences}/>
                   </div>
                   }
-                {tab==='appointments' && <div>appointments</div>}
+                {tab==='appointments' && <Appointments appointments={data.Appointments}/>}
                 {tab==='settings' && <Profile doctorData={data}/>}
               </div>
             </div>

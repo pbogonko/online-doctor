@@ -1,15 +1,52 @@
+
 import { useState } from "react";
 import { AiFillStar } from "react-icons/ai"
 import Button from "../../components/Button";
 import Textarea from "../../components/Textarea";
-
+import { BASE_URL,token } from "../../config";
+import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
+import HashLoader from "react-spinners/HashLoader";
 function Feedbackform() {
     const [rating,setRating]=useState(0)
     const [hover,setHover]=useState(0)
-    const [review,setReview]=useState('')
+    const [reviewText,setReview]=useState('')
+    const [loading,setLoading]=useState(false)
+    const {id}=useParams()
     const handleSubmitReview=async (e)=>{
         e.preventDefault();
-        //later we will use our api
+        setLoading(true)
+        
+        try {
+            if(!rating  || !reviewText){
+                setLoading(false)
+               return toast.error('rating and review fields are required')
+            
+
+            } 
+            const res=await fetch(`${BASE_URL}/doctors/${id}/reviews`,{
+                method:'post',
+                headers:{
+                    'Content-Type':'application/json',
+                    Authorization:`Bearer ${token}`
+                },
+                body:JSON.stringify({rating,reviewText}) 
+            })
+            const result=await res.json()
+        console.log(typeof(res))
+            if(!res.ok){
+                throw new Error(result.message)
+                
+            }
+            setLoading(false)
+            toast.success(result.message)
+        } catch (error) {
+            setLoading(false)
+            toast.error(error.message)
+  
+            
+        }
+        
     };
     
     
@@ -46,8 +83,8 @@ function Feedbackform() {
         <Textarea className="border border-solid border-[#0066ff34] focus:outline-primaryColor w-full px-4 py-3 rounded-md" id=""
         method={e=>setReview(e.target.value)}/>
         </div>
-        <Button type='submit' className="btn" onClick={handleSubmitReview} name='Submit Feedback'/>
-
+         <Button type='submit' className="btn" method={handleSubmitReview} name={loading? <HashLoader size={25} color="#fff "/>:`Submit Feedback`}/> 
+       
         
 
 
@@ -56,3 +93,9 @@ function Feedbackform() {
 }
 
 export default Feedbackform
+
+
+
+
+
+
