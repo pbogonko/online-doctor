@@ -23,18 +23,18 @@ export const deleteUser=async(req,res)=>{
     export const getSingleUser=async(req,res)=>{
         const id=req.params.id
             try{
-                const userFound=await User.findById(id).select('-password')
-                res.status(200).json({success:true,message:'User found',data:userFound})
+                const user=await User.findById(id).select('-password')
+                res.status(200).json({success:true,message:'User found',data:user})
             }catch(err){
                 res.status(404).json({success:false,message:'no user found'})
             }
         };
         //finds all users 
         export const getAllUser=async(req,res)=>{
-            const id=req.params.id
+          
                 try{
-                    const Alluser=await User.find({}).select('-password')
-                    res.status(200).json({success:true,message:'User found',data:Alluser})
+                    const users=await User.find({}).select('-password')
+                    res.status(200).json({success:true,message:'User found',data:users})
                 }catch(err){
                     res.status(404).json({success:false,message:'not found'})
                 }
@@ -42,6 +42,7 @@ export const deleteUser=async(req,res)=>{
             //get user profile
             export const getUserProfile=async(req,res)=>{
                 const userId=req.userId
+               
                 try{
                     const user=await User.findById(userId)
                     if(!user){
@@ -60,13 +61,14 @@ export const deleteUser=async(req,res)=>{
             }
           
            export  const getMyAppointments=async(req,res)=>{
-                try{
+                try{ 
                     //retrieving appointments for specific user
                     const bookings=await Booking.find({user:req.userId})
                     //extract doctor ids from appointment bookings
                     const doctorids=bookings.map(element=>element.doctor.id)
                     //retrieve doctors using doctor ids
-                    const doctor=await Doctor.find({_id:{$in:doctorids}}).select('-password')
+                    const doctors=await Doctor.find({_id:{$in:doctorids}}).select('-password')
+                    res.status(200 ).json({success:true,message:'appointments are getting ready',data:doctors})
                 }catch(err){
                     return res.status(500  ).json({success:false,message:'something went wrong'})
 

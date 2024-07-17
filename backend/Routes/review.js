@@ -1,7 +1,7 @@
 import { getAllReview,createreview } from "../controllers/reviewController.js";
 import express from 'express'
 
-import { authenticate,restrict } from "../auth/verifyTokens.js";
+import { authenticate,restrict} from "../auth/verifyTokens.js";
 
 const router=express.Router({mergeParams:true })
 

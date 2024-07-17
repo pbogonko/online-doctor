@@ -39,7 +39,7 @@ reviewSchema.statics.calcAverageRatings=async function(doctorId){
   
   },
   {
-    $group:{
+     $group:{
       _id:'$doctor',
       numOfRating:{$sum:1},
       avgRating:{$avg:'$rating'}
@@ -52,7 +52,7 @@ await DoctorSchema.findByIdAndUpdate(doctorId,{
   averageRating:stats[0].avgRating
 })
 }
-reviewSchema.post('save',function(){
+reviewSchema.post('save',function (){
   this.constructor.calcAverageRatings(this.doctor)
 })
 export default mongoose.model("Review", reviewSchema);

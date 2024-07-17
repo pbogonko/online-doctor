@@ -12,7 +12,7 @@ import {token } from '../config'
             setLoading(true)
             try{
             const res=await fetch(url,{
-                        headers:{authorization:`Bearer ${token}`},
+                        headers:{Authorization:`Bearer ${token}`},
           
             
              })
