@@ -18,4 +18,7 @@ import avatar from './avatar-icon.png'
 import PatientAvatar from './patient-avatar.png'
 import logo from "./logo.png";
 import userImg from "./avatar-icon.png";
-export {heroImg01,heroImg02,heroImg03,featureImg,icon01,icon02,icon03,videoIcon,aboutImg,aboutCardImg,avatarIcon,faqImg,doctorImg,starIcon,signupImg,avatar,PatientAvatar,logo,userImg}
+import doc1 from './doc1.jpg'
+import doc2 from './doc2.png'
+import doc3 from './doc3.png'
+export {heroImg01,heroImg02,heroImg03,featureImg,icon01,icon02,icon03,videoIcon,aboutImg,aboutCardImg,avatarIcon,faqImg,doctorImg,starIcon,signupImg,avatar,PatientAvatar,logo,userImg,doc1,doc2,doc3}

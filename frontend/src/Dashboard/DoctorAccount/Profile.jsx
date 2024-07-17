@@ -12,7 +12,7 @@ function Profile({doctorData}) {
     phone: "",
     bio: "",
     specialization: "",
-    ticketPrice: 0,
+    ticketPrice: '',
     qualifications: [
     //   {
     //     startingDate: "",
@@ -273,7 +273,7 @@ function Profile({doctorData}) {
                 value={formData.ticketPrice}
                 placeholder="100"
                 className="form_input"
-                onClick={handleChangeInput}
+                onChange={handleChangeInput}
               />
             </div>
           </div>
