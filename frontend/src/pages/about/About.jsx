@@ -22,7 +22,7 @@ function About() {
             <p className='text_para'>
               for the past one year we have been recognized by the ministry of health as one of the best site offering medical care to patients across the country
             </p>
-            <p className="text_para mt-[30px]">offering best medica care is something we strive for each day,caring for our patients-not looking at what we have accomplished but what we can do tomorrow.reaching out to all patients who needs us is our goal </p>
+            <p className="text_para mt-[30px]">offering best medical care is something we strive for each day,caring for our patients-not looking at what we have accomplished but what we can do tomorrow.reaching out to all patients who needs us is our goal </p>
             <Link to='/'>
             <Button className='btn' name='Learn more' />
             </Link>

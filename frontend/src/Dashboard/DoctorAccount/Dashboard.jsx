@@ -12,13 +12,13 @@ import Profile from './Profile'
 import Appointments from './Appointments'
 function Dashboard() {
   const {data,loading,error}=useGetProfile(`${BASE_URL}/doctors/profile/me`)
-  console.log(data)
   const [tab,setTab]=useState('overview')
+  
 
   return (
     <section>
       <div className="max-w-[1170px] px-5 mx-auto">
-         {loading && !error && <Loader/>}
+         {loading && !error &&   <Loader/>}
          {error && !loading && <Error/>}
          {
           !loading && !error &&<div className='grid lg:grid-cols-3 gap-[30px] lg:gap-[50px]'>
@@ -26,7 +26,7 @@ function Dashboard() {
              
             <div className='lg:col-span-2'
             >
-              {data.isApproved==='pending' && (
+              {data.isApproved==='pending' && ( 
                 <div className="flex p-4 mb-4 text-yellow-800 bg-yellow-50 rounded-lg">
                   <svg aria-hidden='true' 
                   className='flex-shrink-0 w-5 h-5'
@@ -51,7 +51,7 @@ function Dashboard() {
                       <span className="flex items-center gap-[6px] text-headingColor text-[14px] leading-5 lg:text-[16px] lg:leading-6 font-semibold">
                         <img src={starIcon} alt="" />
                         {data.averageRating}
-                      </span>
+                      </span> 
                       <span className=" text-textColor text-[14px] leading-5 lg:text-[16px] lg:leading-6 font-semibold">
                         ({data.totalRating})
                       </span>
@@ -59,7 +59,7 @@ function Dashboard() {
                     <p className="text_para font-[15px] lg:max-w-[390px] leading-6" >
                      {data?.bio}
                     </p>
-                    </div>
+                     </div>
                   </div>
                   <DoctorsAbout 
                   name={data.name}
@@ -67,7 +67,9 @@ function Dashboard() {
                     qualifications={data.qualifications} experiences={data.experiences}/>
                   </div>
                   }
-                {tab==='appointments' && <Appointments appointments={data.Appointments}/>}
+                {/* {tab==='appointments' && <Appointments appointments={data.appointments}/>} */}
+ 
+                {tab==='appointments' && <Appointments />} 
                 {tab==='settings' && <Profile doctorData={data}/>}
               </div>
             </div>

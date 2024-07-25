@@ -15,6 +15,7 @@ function  SidePanel({doctorId,ticketPrice,timeSlots}) {
       const data=await res.json()
       console.log(ticketPrice)
       if(!res.ok){
+        console.log(data.message)
         throw new Error(data.message+'please try again')
       }
       if(data.session.url){

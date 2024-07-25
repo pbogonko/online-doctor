@@ -44,7 +44,7 @@ function Myaccount() {
                         <p className="text-textColor text-[15px] leading-6 font-medium">{userData?.email}</p>
                         <p className="text-textColor text-[15px] leading-6 font-medium">
                             Blood Type:
-                            <span className="ml-2 text -headingColor text-[22px] lleading-8">{userData.bloodTyp}</span>
+                            <span className="ml-2 text -headingColor text-[22px] lleading-8">{userData.bloodType}</span>
                         </p>
                     </div>
                     <div className="mt-[50px] md:mt-[100px]">

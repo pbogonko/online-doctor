@@ -24,7 +24,7 @@ function Tabs({ tab, setTab }) {
               : "bg-transparent text-headingColor"
           } w-full   mt-0  py-[15px] px-[35px] rounded-md `}
         >
-          overview
+          Overview
         </button>
         <button
           onClick={() => setTab("appointments")}
@@ -34,7 +34,7 @@ function Tabs({ tab, setTab }) {
               : "bg-transparent text-headingColor"
           } w-full   mt-0  py-[15px] px-[35px] rounded-md `}
         >
-          appointments
+          Appointments
         </button>
         <button
           onClick={() => setTab("settings")}
@@ -44,7 +44,7 @@ function Tabs({ tab, setTab }) {
               : "bg-transparent text-headingColor"
           } w-full   mt-0  py-[15px] px-[35px] rounded-md `}
         >
-          profile
+          Profile
         </button >
         <div className="mt-[50px] w-full" onClick={handleLogout}>
           <button className="w-full bg-[#181A1E] p-3 text-[16px] leading-7 rounded-md text-white">

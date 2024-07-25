@@ -5,7 +5,20 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { PatientAvatar } from '../../assets/images'
 import {HiStar} from  'react-icons/hi'
+import useFetchData from '../../hooks/useFetchData'
+import { BASE_URL } from '../../config'
 function Testiminial() {
+   
+    const {data:reviews}=useFetchData(`${BASE_URL}/reviews`)
+   
+    const handleStars=(starCount)=>{
+        
+        const stars=Array.from({length:starCount},(_,index)=>(
+            <HiStar key={index} className='text-yellowColor w-[18px] h-5'/>
+            
+        ))
+        return stars
+    }
   return (
     <div className='mt-[30px] lg:mt-[55px]'>
         <Swiper
@@ -32,7 +45,38 @@ function Testiminial() {
             },
         }}>
             
-             <SwiperSlide>
+            {
+                reviews.map((item,index)=>(
+                    console.log(item),
+                    <SwiperSlide key={index}>
+                        
+                    <div className="py-[30px] px-5 rounded-3">
+                        <div className="flex gap-[13px] items-center">
+                            <img src={PatientAvatar} alt="" />
+                            <div>
+                            <h4 className="text-[18px] leading-[30px] font-semibold text-textColor">
+                                user@{item._id}
+                            </h4>
+                            <div className="flex items-center gap-[2px]">
+                                {handleStars(item.rating)}
+                        
+                                     {/* <HiStar className='text-yellowColor w-[18px] h-5'/>
+                                     <HiStar className='text-yellowColor w-[18px] h-5'/>
+                                     <HiStar className='text-yellowColor w-[18px] h-5'/>
+                                     <HiStar className='text-yellowColor w-[18px] h-5'/>
+                                     <HiStar className='text-yellowColor w-[18px] h-5'/> */}
+                            </div>
+                        </div>  
+                    </div>
+                    <p className="text-[16px] leading-7 mt-4 text-textColor font-[400]">
+                            {item.reviewText}
+                         </p>
+                    </div>
+                 </SwiperSlide>
+                ))
+                
+            }
+            {/* <SwiperSlide>
                 <div className="py-[30px] px-5 rounded-3">
                     <div className="flex gap-[13px] items-center">
                         <img src={PatientAvatar} alt="" />
@@ -119,29 +163,7 @@ function Testiminial() {
                          I have taken medical services from them. they treat so well and they are providing the best medical services
                      </p>
                 </div>
-             </SwiperSlide>
-             <SwiperSlide>
-                <div className="py-[30px] px-5 rounded-3">
-                    <div className="flex gap-[13px] items-center">
-                        <img src={PatientAvatar} alt="" />
-                        <div>
-                        <h4 className="text-[18px] leading-[30px] font-semibold text-textColor">
-                            polycarp bogonko
-                        </h4>
-                        <div className="flex items-center gap-[2px]">
-                                 <HiStar className='text-yellowColor w-[18px] h-5'/>
-                                 <HiStar className='text-yellowColor w-[18px] h-5'/>
-                                 <HiStar className='text-yellowColor w-[18px] h-5'/>
-                                 <HiStar className='text-yellowColor w-[18px] h-5'/>
-                                 <HiStar className='text-yellowColor w-[18px] h-5'/>
-                        </div>
-                    </div>  
-                </div>
-                <p className="text-[16px] leading-7 mt-4 text-textColor font-[400]">
-                         I have taken medical services from them. they treat so well and they are providing the best medical services
-                     </p>
-                </div>
-             </SwiperSlide>
+             </SwiperSlide> */}
              
              
 

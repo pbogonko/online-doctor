@@ -1,5 +1,6 @@
 import Doctor from '../models/DoctorSchema.js'
 import Booking from '../models/BookingSchema.js'
+import User from '../models/UserSchema.js'
 export const updateDoctor=async(req,res)=>{
 const id=req.params.id
     try{
@@ -71,4 +72,39 @@ export const deleteDoctor=async(req,res)=>{
 
                 }
             }
+
+            export const getDoctorAppointments = async (req, res) => {
+                
+                try {
+                    // Retrieve appointments for the specific doctor
+                    const appointments = await Booking.find({ doctor: req.userId });
+                  
+                
+                     // Extract user IDs from the bookings
+                     const userIds = appointments.map(appointment => appointment.user.id);
+                     
+            
+                    // Retrieve users associated with these appointments
+                    const users = await User.find({ _id: { $in: userIds } }).select('-password');
+                     // Combine appointments and user details
+        const appointmentsWithUsers = appointments.map(appointment => ({
+            ...appointment.toObject(),
+            user: users.find(user => user._id.equals(appointment.user.id)),
+        }));
+            console.log(appointmentsWithUsers)
+                    res.status(200).json({
+                        success: true,
+                        message: 'Appointments for doctor retrieved successfully',
+                        data:  appointmentsWithUsers
+                    });
+                } catch (err) {
+                    console.log(err)
+                    res.status(500).json({
+                        success: false,
+                        message: 'Failed to retrieve appointments for doctor',
+                        error: err.message
+                    });
+                }
+            };
+            
            

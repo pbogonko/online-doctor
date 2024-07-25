@@ -12,7 +12,7 @@ const initialState = {
     switch (action.type) {
         case 'LOGIN_START':
             return {
-                user: null,
+                 user: null,
                 role: null, 
                 token: null
             }  ;

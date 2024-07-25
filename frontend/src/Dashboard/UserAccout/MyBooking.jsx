@@ -7,8 +7,8 @@ import Error from "../../Error/Error"
 
 function MyBooking() {
     const {data:appointments,loading,error}=useFetchData(`${BASE_URL}/users/appointments/my-appointments`)
-    console.log(typeof(appointments))
-    console.log(appointments)
+    console.log('appointments',appointments)
+    
     
   return (
     <div>

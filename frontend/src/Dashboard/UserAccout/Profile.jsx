@@ -58,7 +58,7 @@ function Profile({user}) {
           body:JSON.stringify(formData)
         }
       )
-      const {message}=await res.json
+      const {message}=await res.json()
       if(!res.ok){
         throw new  Error(message)
       }

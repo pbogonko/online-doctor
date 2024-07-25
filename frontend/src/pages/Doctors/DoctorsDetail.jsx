@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { starIcon} from '../../assets/images'
 import DoctorsAbout from './DoctorsAbout'
 import DoctorFeedback from './DoctorFeedback'
+import Symptoms from './SymptomForm.jsx'
 import SidePanel from '../../layout/SidePanel'
 import { BASE_URL } from '../../config'
 import Loading from '../../Loader/Loading'
@@ -61,6 +62,8 @@ function DoctorsDetail() {
             </div>
           </div>
           <div className="mt-[50px] border-b border-solid border-[#0066ff34]">
+          <button onClick={()=>setTab('symptoms') } className={`${tab==='symptoms' && 'border-b border-solid border-primaryColor'}  py-2 px-5 mr-5 text-[16px] leading-7 text-headingColor font-semibold `}>
+          Symptoms</button>
             <button onClick={()=>setTab('about') } className={`${tab==='about' && 'border-b border-solid border-primaryColor'}  py-2 px-5 mr-5 text-[16px] leading-7 text-headingColor font-semibold `}>
               About</button>
               <button onClick={()=>setTab('feedback')} className={`${tab==='feedback' && 'border-b border-solid border-primaryColor'} py-2 px-5 mr-5 text-[16px] leading-7 text-headingColor font-semibold`}>
@@ -72,6 +75,9 @@ function DoctorsDetail() {
             }
             {
               tab==='feedback'&&<DoctorFeedback reviews={reviews} totalRating={totalRating}/>
+            }
+             {
+              tab==='symptoms'&&<Symptoms/>
             }
            </div>
           </div>

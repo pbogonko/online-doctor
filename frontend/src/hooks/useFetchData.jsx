@@ -15,7 +15,8 @@ import {token } from '../config'
                         headers:{Authorization:`Bearer ${token}`},
           
             
-             })
+             }
+            )
          
             const result=await res.json()
             if(!res.ok){

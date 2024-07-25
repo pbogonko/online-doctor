@@ -96,7 +96,7 @@ function Home() {
       </section>
       {/* hero section end */}
 
-      <section>
+      <section className="">
         <div className="container">
           <div className="lg:w-[470px] mx-auto">
             <h2 className="heading text-center">

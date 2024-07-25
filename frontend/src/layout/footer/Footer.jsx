@@ -42,7 +42,7 @@ import { Link } from 'react-router-dom'
   ]
   const quickLinks02=[
     {
-      path:'/find-a-doctor',
+      path:'/doctors',
       display:'find a doctor'
     },
     {
