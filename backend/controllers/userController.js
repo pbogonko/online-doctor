@@ -1,6 +1,8 @@
 import User from '../models/UserSchema.js'
 import Booking from '../models/BookingSchema.js'
 import Doctor from '../models/DoctorSchema.js'
+import mongoose from 'mongoose';
+const ObjectId=mongoose.Types.ObjectId
 export const updateUser=async(req,res)=>{
 const id=req.params.id
     try{
@@ -24,9 +26,13 @@ export const deleteUser=async(req,res)=>{
         const id=req.params.id
             try{
                 const user=await User.findById(id).select('-password')
-                res.status(200).json({success:true,message:'User found',data:user})
+                if(!user){
+                    throw new Error('user not found')
+                }
+               return res.status(200).json({success:true,message:'User found',data:user})
+                
             }catch(err){
-                res.status(404).json({success:false,message:'no user found'})
+              return  res.status(404).json({success:false,message:err.message})
             }
         };
         //finds all users 

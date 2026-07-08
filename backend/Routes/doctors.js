@@ -8,7 +8,7 @@ import reviewRoute from './review.js'
 const router=express.Router()
 
 router.use('/:doctorId/reviews',reviewRoute) 
-router.get('/',getAllDoctor)
+router.get('/',authenticate,getAllDoctor)
 router.get('/:id',getSingleDoctor)
 
 router.put('/:id',authenticate,restrict(['doctor']),updateDoctor)

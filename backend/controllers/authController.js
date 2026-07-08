@@ -10,46 +10,80 @@
     })
   }
   export const register=async(req,res)=>{
+    try{
     const {email,password,name,role,photo,gender}=req.body;
     const hashedPasword=await bcrypt.hash(password,10)
     let user=null
-            
-        if(role==='patient'){
-          user=await  User.findOne({email})
-        }else if(role==='doctor'){
-            user=await Doctor.findOne({email})
-        }
-        if(role==='patient'){
-   user= User.create({
+    //checking role
+    if (role==='patient'){
+      user=await User.create({
       name,
       email,
       photo,
       gender,
       role,
       password:hashedPasword
-    })
-  }
-  if(role==='doctor'){
-    user= Doctor.create({
-      name,
-      email,
-      photo,
-      gender,
-      role,
-      password:hashedPasword
-    })
 
+      });
+    }else if(role==='doctor'){
+      user=await Doctor.create({
+        name,
+        email,
+        photo,
+        gender,
+        role,
+        password:hashedPasword
+      })
+    }
+    else{
+      return res.status(403).json({message:"user creation failed,wrong data provided"})
+    }
+    if(user){
+      return res.status(201).json({success:true,message:"user created successfully"})
+    }
+    
+  }catch(err){
+    return res.status(500).json({success:false,message:err.message})
+    
   }
-    user.then((users)=>{
-      res.status(200).json({success:true,message:'User successfully created'})
+}
+            
+  //       if(role==='patient'){
+  //         user=await  User.findOne({email})
+  //       }else if(role==='doctor'){
+  //           user=await Doctor.findOne({email})
+  //       }
+  //       if(role==='patient'){
+  //  user= User.create({
+  //     name,
+  //     email,
+  //     photo,
+  //     gender,
+  //     role,
+  //     password:hashedPasword
+  //   })
+  // }
+  // // if(role==='doctor'){
+  //   user= Doctor.create({
+  //     name,
+  //     email,
+  //     photo,
+  //     gender,
+  //     role,
+  //     password:hashedPasword
+  //   })
+// 
+ // }
+  //   user.then((users)=>{
+  //     res.status(200).json({success:true,message:'User successfully created'})
               
        
-    })
-    .catch((err)=>{
-      res.status(500).json({success:false,message:err.message})
-      })
+  //   })
+  //   .catch((err)=>{
+  //     res.status(500).json({success:false,message:err.message})
+  //     })
 
-  }
+  // }
 
   export const login=async(req,res)=>{
     try{
@@ -57,12 +91,17 @@
       let user=null
       const patient=await User.findOne({email})
       const doctor=await Doctor.findOne({email})
-      if(patient){
+    
+      if(patient && patient.role==='patient'){
         user=patient
+        
+      
       }
-      if(doctor){
+     else if(doctor&& doctor.role==='doctor'){
         user=doctor
+        
       }
+     
 
       // //check if user exists or not
       if(!user){

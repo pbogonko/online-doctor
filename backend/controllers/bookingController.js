@@ -7,29 +7,51 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import nodemailer from 'nodemailer'
-import {google} from 'googleapis'
+// import {google} from 'googleapis'
+// import {auth} from 'express-oauth2-jwt-bearer'
+// const oauth2Client = new google.auth.OAuth2(
+//     process.env.CLIENT_ID, 
+//     process.env.CLIENT_SECRET, 
+//     'http://localhost:5173' 
+//   );
+//   oauth2Client.setCredentials({
+//     refresh_token: process.env.REFRESH_TOKEN, 
+//   });
+// const checkJWT=auth(
+//     {
+//         issuerBaseURL:`https://${process.env.AUTH0_DOMAIN}`,
+//         audience:process.env.AUTH0_AUDIENCE
+//     }
+// )
 
-const oauth2Client = new google.auth.OAuth2(
-    process.env.CLIENT_ID, 
-    process.env.CLIENT_SECRET, 
-    'http://localhost:5173' 
-  );
-  oauth2Client.setCredentials({
-    refresh_token: process.env.REFRESH_TOKEN, 
-  });
-
-const transporter = nodemailer.createTransport({
-    service:'gmail',
-    
-    auth: {
-        type:'OAUTH2',
+const transporter=nodemailer.createTransport({
+    host:'smtp.google.com',
+    port:465,
+    secure:true,
+    auth:{
         user: process.env.EMAIL_USER,
         clientId: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
         refreshToken: process.env.REFRESH_TOKEN,
-        accessToken: oauth2Client.getAccessToken(),
-    },
-});
+        accessToken: process.env.REFRESH_TOKEN
+      
+
+    }
+
+})
+
+// const transporter = nodemailer.createTransport({
+//     service:'gmail',
+    
+//     auth: {
+//         type:'OAUTH0',
+//         user: process.env.EMAIL_USER,
+//         clientId: process.env.CLIENT_ID,
+//         clientSecret: process.env.CLIENT_SECRET,
+//         refreshToken: process.env.REFRESH_TOKEN,
+//         accessToken: process.env.REFRESH_TOKEN
+//     },
+// });
 
 
 export const getCheckoutSession=async (req,res)=>{

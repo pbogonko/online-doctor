@@ -1,0 +1,1 @@
+GET http://localhost:8080/api/protected/scoped HTTP/1.1

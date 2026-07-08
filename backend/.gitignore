@@ -1,2 +1,4 @@
 node_modules
 .env
+tokens.js
+index2.js
