@@ -18,20 +18,20 @@ function Profile({user}) {
     password:'',
     photo:null,
     gender:'',
-    bloodType:''
-
+    bloodType:'',
+    phone:''
   })
   const navigate=useNavigate()
   useEffect(()=>{
     
-    setFormData({name:user.name,email:user.email,photo:user.photo,gender:user.gender,bloodType:user.bloodType})
+    setFormData({name:user.name,email:user.email,photo:user.photo,phone:user.phone,gender:user.gender,bloodType:user.bloodType})
   },[user])
   const [loading,isLoading]=useState(false)
   const handleInputChange=e=>{
     setFormData({...formData,[e.target.name]:e.target.value})
    
   }
-
+ console.log(formData)
   const handleFileinput=async (e)=>{
     const file=(e.target.files[0])
     
@@ -103,11 +103,11 @@ function Profile({user}) {
               </div>
               <div className="mb-5">
                 <Input
-                  type="password"
-                  placeHolder="Enter your password"
+                  type="text"
+                  placeHolder="Enter your phone number"
                   autoComplete='on'
-                  name="password"
-                  value={formData.password}
+                  name="phone"
+                  value={formData.phone}
                   method={handleInputChange}
           
                   className="w-full max-w-[400px] pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[22px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer"

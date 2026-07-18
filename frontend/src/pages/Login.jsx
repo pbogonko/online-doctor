@@ -23,7 +23,6 @@ function Login() {
     isLoading(true)
     
     try {
-      
       const res=await fetch(`${BASE_URL}/auth/login`,
         {
           method:'post',

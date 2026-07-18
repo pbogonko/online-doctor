@@ -3,7 +3,7 @@ import {doctorImg, starIcon} from '../../assets/images'
 
 import Loader from '../../Loader/Loading'
 import Error from '../../Error/Error'
-import useGetProfile from '../../hooks/useFetchData'
+import useFetchData from '../../hooks/useFetchData'
 import { BASE_URL } from '../../config'
 import Tabs from './Tabs'
 import { useState } from 'react'
@@ -11,7 +11,7 @@ import DoctorsAbout from '../../pages/Doctors/DoctorsAbout'
 import Profile from './Profile'
 import Appointments from './Appointments'
 function Dashboard() {
-  const {data,loading,error}=useGetProfile(`${BASE_URL}/doctors/profile/me`)
+  const {data,loading,error}=useFetchData(`${BASE_URL}/doctors/profile/me`)
   const [tab,setTab]=useState('overview')
   
 

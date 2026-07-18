@@ -59,8 +59,31 @@ const toggleMenu=()=>(menuRef.current.classList.toggle('show__menu')
           {/* menu*/}
           <div className="navigation" ref={menuRef } onClick={toggleMenu}>
             <ul className="menu flex items-center gap-[2.7rem]">
-              {navLinks.map((link, index) => (
+              {navLinks.map((link, index) => {
+  const finalPath = (role === 'doctor' && link.path === '/doctors') 
+    ? '/doctors/profile/me'
+    : link.path;
+   const finalDislay = (role === 'doctor' && link.display === 'Find a Doctor') 
+    ? 'profile'
+    : link.display;
+  return (
+    <li key={index}>
+      <NavLink
+        to={finalPath}
+        className={({ isActive }) =>
+          isActive
+            ? "text-primaryColor text-[16px] leading-7 font-[600]"
+            : "text-textColor text-[16px] leading-7 font-[500] hover:text-primaryColor"
+        }
+      >
+        {finalDislay}
+      </NavLink>
+    </li>
+  );
+})}
+              {/* {navLinks.map((link, index) => (
                 <li key={index}>
+                  
                   <NavLink
                     to={link.path}
                     className={(navClass) =>
@@ -72,7 +95,7 @@ const toggleMenu=()=>(menuRef.current.classList.toggle('show__menu')
                     {link.display}
                   </NavLink>
                 </li>
-              ))}
+              ))} */}
             </ul>
           </div>
           {/* nav right */}

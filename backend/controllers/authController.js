@@ -4,6 +4,7 @@
   import bcrypt from 'bcryptjs'
   import dotenv from 'dotenv'
   dotenv.config()
+  // auth0 is going to generate a token for us
   const generateToken=user=>{
     return jwt.sign({id:user._id,role:user.role},process.env.JWT_SECRET_KEY,{
       expiresIn:'15d'

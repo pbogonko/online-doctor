@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# test files 
+test.js
+r.rest
+request.rest

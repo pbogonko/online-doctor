@@ -14,9 +14,8 @@ export const getAllReview=async (req,res)=>{
     //creating a review
     export const createreview=async (req,res)=>{
         if(!req.body.doctor) req.body.doctor=req.params.doctorId
-        if (!req. body.user) req.body.user=req.params.userId
+        if (!req.body.user) req.body.user=req.userId//updated it to be fetched from the req body (params was returning undefined)
         const newReview= new Review(req.body)
-        
         try{
             const savedReview=await newReview.save()
             await Doctor.findByIdAndUpdate(req.body.doctor,{
