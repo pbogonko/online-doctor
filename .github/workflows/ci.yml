@@ -27,7 +27,8 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "🌱 New branch created in ${{ github.repository }}"
           to: ${{secrets.EMAIL_USERNAME}}
-          from: GitHub Actions
+          from: ${{ secrets.EMAIL_USERNAME }}
+          envelope_from: ${{ secrets.EMAIL_USERNAME }}
           body: "Branch '${{ github.event.ref }}' was created by ${{ github.actor }} in ${{ github.repository }}."
 
   repo-forked:
@@ -43,7 +44,8 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "🍴 ${{ github.repository }} was forked"
           to:  ${{ secrets.EMAIL_USERNAME }}
-          from: GitHub Actions
+          from: ${{ secrets.EMAIL_USERNAME }}
+          envelope_from: ${{ secrets.EMAIL_USERNAME }}
           body: "${{ github.repository }} was forked by ${{ github.actor }}."
 
   branch-pushed:
@@ -59,7 +61,8 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "📌 Push to ${{ github.ref_name }} in ${{ github.repository }}"
           to:  ${{ secrets.EMAIL_USERNAME }}
-          from: GitHub Actions
+          from: ${{ secrets.EMAIL_USERNAME }}
+          envelope_from: ${{ secrets.EMAIL_USERNAME }}
           body: "${{ github.actor }} pushed to '${{ github.ref_name }}': ${{ github.event.head_commit.message }}"
 
   pr-opened:
@@ -75,7 +78,8 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "🔀 New PR #${{ github.event.pull_request.number }} in ${{ github.repository }}"
           to:  ${{ secrets.EMAIL_USERNAME}}
-          from: GitHub Actions
+          from: ${{ secrets.EMAIL_USERNAME }}
+          envelope_from: ${{ secrets.EMAIL_USERNAME }}
           body: "PR #${{ github.event.pull_request.number }} '${{ github.event.pull_request.title }}' opened by ${{ github.actor }}."
 
   pr-merged:
@@ -91,5 +95,6 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "✅ PR #${{ github.event.pull_request.number }} merged in ${{ github.repository }}"
           to:  ${{ secrets.EMAIL_USERNAME }}
-          from: GitHub Actions
+          from: ${{ secrets.EMAIL_USERNAME }}
+          envelope_from: ${{ secrets.EMAIL_USERNAME }}
           body: "PR #${{ github.event.pull_request.number }} '${{ github.event.pull_request.title }}' merged by ${{ github.actor }}."
