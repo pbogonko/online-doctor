@@ -42,7 +42,7 @@ jobs:
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "🍴 ${{ github.repository }} was forked"
-          to:  ${{ secrets.EMAIL_PASSWORD }}
+          to:  ${{ secrets.EMAIL_USERNAME }}
           from: GitHub Actions
           body: "${{ github.repository }} was forked by ${{ github.actor }}."
 
@@ -58,7 +58,7 @@ jobs:
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "📌 Push to ${{ github.ref_name }} in ${{ github.repository }}"
-          to:  ${{ secrets.EMAIL_PASSWORD }}
+          to:  ${{ secrets.EMAIL_USERNAME }}
           from: GitHub Actions
           body: "${{ github.actor }} pushed to '${{ github.ref_name }}': ${{ github.event.head_commit.message }}"
 
@@ -74,7 +74,7 @@ jobs:
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "🔀 New PR #${{ github.event.pull_request.number }} in ${{ github.repository }}"
-          to:  ${{ secrets.EMAIL_PASSWORD }}
+          to:  ${{ secrets.EMAIL_USERNAME}}
           from: GitHub Actions
           body: "PR #${{ github.event.pull_request.number }} '${{ github.event.pull_request.title }}' opened by ${{ github.actor }}."
 
@@ -90,6 +90,6 @@ jobs:
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "✅ PR #${{ github.event.pull_request.number }} merged in ${{ github.repository }}"
-          to:  ${{ secrets.EMAIL_PASSWORD }}
+          to:  ${{ secrets.EMAIL_USERNAME }}
           from: GitHub Actions
           body: "PR #${{ github.event.pull_request.number }} '${{ github.event.pull_request.title }}' merged by ${{ github.actor }}."
