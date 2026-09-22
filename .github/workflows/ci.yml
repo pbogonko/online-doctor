@@ -57,7 +57,7 @@ jobs:
       - name: "starting trivy"
         uses:  aquasecurity/trivy-action@v0.36.0
         with:
-                scan: fs #SCANS THE FILE SYSTEM
+                scan-type: fs #SCANS THE FILE SYSTEM
                 format: table #OUTPUT
                 ignore-unfixed: true #IGNORES UNFIXED VULNERABILITIES
                 severity: HIGH,CRITICAL
