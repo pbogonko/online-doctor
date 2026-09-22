@@ -52,6 +52,19 @@ jobs:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
+      - name: "start vulnerability check"
+        uses:  actions/checkout@v4
+      - name: "starting trivy"
+        uses:  aquasecurity/trivy-action@v0.36.0
+        with:
+                scan: fs #SCANS THE FILE SYSTEM
+                format: table #OUTPUT
+                ignore-unfixed: true #IGNORES UNFIXED VULNERABILITIES
+                severity: HIGH,CRITICAL
+      - name: "alerting user"
+        run: echo starting alert
+
+    
       - name: Email - push to watched branch
         uses: dawidd6/action-send-mail@v21
         with:
