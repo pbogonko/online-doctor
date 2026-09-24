@@ -1,6 +1,8 @@
 name: main runner
 on:
     workflow_dispatch:
+permissions:
+    contents: read
 env:
     WORKFLOW_ENV: WORKFLOW VARIABLES
 jobs:
