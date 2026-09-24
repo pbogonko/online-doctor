@@ -1,0 +1,23 @@
+name: main runner
+on:
+    workflow_dispatch:
+permissions:
+    contents: read
+env:
+    WORKFLOW_ENV: WORKFLOW VARIABLES
+jobs:
+    job_wide_env:
+        env:
+            JOB_VARS: THESE ARE JOB VARS
+        runs-on: ubuntu-latest
+        steps:
+            - name: "steps varables"
+              env:
+                STEP_VARS: STEP VARABLES
+              run: 
+                echo "workflow_vars:$WORKFLOW_ENV"
+                echo "jobs_var:$JOB_VARS"
+                echo "steps_var:$STEP_VARS"
+
+              
+        
