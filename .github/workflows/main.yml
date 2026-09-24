@@ -18,7 +18,7 @@ jobs:
                 echo "steps_var:$STEP_VARS"
             - name: "steps variables"
               run: 
-                echo steps var:"$STEPS_VARS"
+                echo "steps var:$STEPS_VARS"
 
 
               
