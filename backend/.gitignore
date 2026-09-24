@@ -2,3 +2,7 @@ node_modules
 .env
 tokens.js
 index2.js
+r.rest
+backend.zip
+.dockerignore
+

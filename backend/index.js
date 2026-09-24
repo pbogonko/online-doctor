@@ -14,7 +14,7 @@ const corsOptions={
     origin:true
 }
 app.use(express.json())
-const port=process.env.PORT||8000
+const port=process.env.PORT
 
 app.get('/',(req,res)=>{
     res.send('Hello from the server!')
