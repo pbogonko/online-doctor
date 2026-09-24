@@ -1,0 +1,7 @@
+node_modules
+npm-debug.log
+.git
+.env
+.gitgnore
+index2.js
+tokens.js
