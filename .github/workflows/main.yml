@@ -1,24 +1,93 @@
-name: main runner
+# environment varibles
+#   - workflow variables, job  variables and steps variables
+# - persisting environment variables
+name: variables and artifacts
 on:
     workflow_dispatch:
+#workflow variables
 env:
-    WORKFLOW_ENV: WORKFLOW VARIABLES
+    TOKENS: 28474dfhvpd97
+
 jobs:
-    job_wide_env:
-        env:
-            JOB_VARS: THESE ARE JOB VARS
+    testing_workflow_variables:
         runs-on: ubuntu-latest
         steps:
-            - name: "steps varables"
+            - name: "workflow variables"
+              run: echo "WORKFLOW VARIABLE:$TOKENS"
+
+    #JOBS VARIABLES
+    testing_jobs_variables:
+        needs: 
+            testing_workflow_variables
+        env:
+            JOB_VAR: 4730jfhdpsldhgdf
+        runs-on: ubuntu-latest
+        steps:
+            - name: "job variables used within a job"
+              run: echo "JOB VARIABLE:$JOB_VAR"
+            - name: "workflow variable"
+              run: echo "still we can access workflow variables"
+            - name: "workflow variables"  
+              run: echo "WORKFLOW_VAR:$tTOKENS"
+
+    #steps variables
+    
+    testing_steps:
+        needs: 
+            testing_jobs_variables
+        env:
+          JOB3_VAR: 45677494033827dhfheie
+        runs-on: ubuntu-latest
+        steps:
+            - name: "step one"
               env:
-                STEP_VARS: STEP VARABLES
-              run: 
-                echo "workflow_vars:$WORKFLOW_ENV"
-                echo "jobs_var:$JOB_VARS"
-                echo "steps_var:$STEP_VARS"
-            - name: "steps variables"
-              run: 
-                echo steps var:"$STEPS_VARS"
+                STEPS_VAR: 3833494ehddbdn
+              run: echo "used only here."
+
+            - name: "step variable"
+              run: echo "STEPS VAR:$STEPS_VAR"
+             
+            - name: "steps var print"
+              run: echo "Workflow variables:$TOKEN"
+
+            - name: "job variables"
+              run: echo "JOB3_VAR:$JOB3_VAR"
+
+            - name: "steps variables(unreachable)"
+              run: echo "STEPS VARIABLES:$STEPS_VAR"
+            
+
+
+
+
+
+
+
+
+
+
+
+# name: main runner
+# on:
+#     workflow_dispatch:
+# env:
+#     WORKFLOW_ENV: WORKFLOW VARIABLES
+# jobs:
+#     job_wide_env:
+#         env:
+#             JOB_VARS: THESE ARE JOB VARS
+#         runs-on: ubuntu-latest
+#         steps:
+#             - name: "steps varables"
+#               env:
+#                 STEP_VARS: STEP VARABLES
+#               run: 
+#                 echo "workflow_vars:$WORKFLOW_ENV"
+#                 echo "jobs_var:$JOB_VARS"
+#                 echo "steps_var:$STEP_VARS"
+#             - name: "steps variables"
+#               run: 
+#                 echo steps var:"$STEPS_VARS"
 
 
               
