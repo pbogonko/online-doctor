@@ -39,6 +39,16 @@ jobs:
           JOB3_VAR: 45677494033827dhfheie
         runs-on: ubuntu-latest
         steps:
+            - name: "steps varables"
+              env:
+                STEP_VARS: STEP VARABLES
+              run: 
+                echo "workflow_vars:$WORKFLOW_ENV"
+                echo "jobs_var:$JOB_VARS"
+                echo "steps_var:$STEP_VARS"
+            - name: "steps variables"
+              run: 
+                echo "steps var:$STEPS_VARS"
             - name: "step one"
               env:
                 STEPS_VAR: 3833494ehddbdn
