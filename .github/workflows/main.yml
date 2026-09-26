@@ -11,9 +11,16 @@ env:
 jobs:
     testing_workflow_variables:
         runs-on: ubuntu-latest
+        outputs:
+            MY_TOKENS: ${{steps.tokens.outputs.mytoken}}
         steps:
             - name: "workflow variables"
-              run: echo "WORKFLOW VARIABLE:$TOKENS"
+              id: tokens #key for persistence
+            #   run: echo "WORKFLOW VARIABLE:$TOKENS"
+            # - name: "value itself"
+              run: | 
+                mytoken=5994049rjrfhfhr  
+                echo "TOKEN=${mytoken}">>$GITHUB_OUTPUT
 
     #JOBS VARIABLES
     testing_jobs_variables:
@@ -25,8 +32,10 @@ jobs:
         steps:
             - name: "job variables used within a job"
               run: echo "JOB VARIABLE:$JOB_VAR"
+
             - name: "workflow variable"
               run: echo "still we can access workflow variables"
+
             - name: "workflow variables"  
               run: echo "WORKFLOW_VAR:$tTOKENS"
 
@@ -55,16 +64,26 @@ jobs:
               run: echo "used only here."
 
             - name: "step variable"
-              run: echo "STEPS VAR:$STEPS_VAR"
+              run: echo "STEPS VAR:$STEP_VAR"
              
             - name: "steps var print"
-              run: echo "Workflow variables:$TOKEN"
+              run: echo "Workflow variables:$TOKENS"
 
             - name: "job variables"
               run: echo "JOB3_VAR:$JOB3_VAR"
 
             - name: "steps variables(unreachable)"
-              run: echo "STEPS VARIABLES:$STEPS_VAR"
+              run: echo "STEPS VARIABLES:$STEP_VARS"
+
+            - name: "persisted value"
+              run: echo "perst var:${{needs.testing_jobs_variables.outputs.MY_TOKENS}}"
+    
+    #persisting variables(storing them in the environment variables)
+    git_environment:
+        runs-on: ubuntu-latest
+        steps:
+            - name: "environment variables"
+              run: echo "ENVIRONMENT VAR:"
             
 
 
