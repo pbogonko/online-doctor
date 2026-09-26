@@ -30,6 +30,7 @@ jobs:
                 node-version: "22"
             - name: "install packages"
               run: npm ci
+              working-directory: ./backend
 
             - name: "verify install"
               run: node --version
