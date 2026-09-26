@@ -6,6 +6,7 @@ on:
             - main
         paths:
             - "backend/**"
+            - "frontend/**"
 
 jobs:
     scan-packages:
@@ -22,7 +23,12 @@ jobs:
         needs: 
             - scan-packages
         steps:
+
             - name: "install-node"
+              uses: actions/stup-node@v4
+              with:
+                node-version: "22"
+            - name: "install packages"
               run: npm ci
 
             - name: "verify install"
@@ -30,5 +36,6 @@ jobs:
             
             - name: "read packages"
               run: nano package.json
+              
             
 
