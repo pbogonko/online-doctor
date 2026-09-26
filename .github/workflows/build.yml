@@ -5,18 +5,30 @@ on:
         branches:
             - main
         paths:
-             "backend/**"
+            - "backend/**"
 
 jobs:
-    install-packages:
+    scan-packages:
         runs-on: ubuntu-latest
         steps:
             - name: "read repo"
               uses: actions/checkout@v5
-
+            
+            - name: "secrets-scan"
+              uses: gitleaks/gitleaks-action@v2
+    
+    install-packages:
+        runs-on: ubuntu-latest
+        needs: 
+            - scan-packages
+        steps:
             - name: "install-node"
-              run: |
-                npm ci
-                echo node --version
-                npm run dev
+              run: npm ci
+
+            - name: "verify install"
+              run: node --version
+            
+            - name: "read packages"
+              run: nano package.json
+            
 
