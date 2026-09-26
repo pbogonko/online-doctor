@@ -1,0 +1,39 @@
+# needed services
+name: backend
+type: backend
+runtime: node
+
+# What compute this service needs
+compute:
+  platform: FARGATE
+  cpu: 512
+  memory: 1024
+  port: 4000
+  health_check_path: /health
+ 
+#DB
+database:
+  engine: MONGODB
+  version: "8.0"
+  size: small                # maps to an RDS instance class in Terraform
+ 
+#ENV FILES
+env:
+  - name: DATABASE_URL
+    required: true
+    source: generated         # generated | secret | plain
+  - name: JWT_SECRET
+    required: true
+    source: secret            # pulled from AWS Secrets Manager
+  - name: LOG_LEVEL
+    required: false
+    default: info
+ 
+# Other AWS resources this service needs provisioned
+resources:
+  - type: s3
+    name: uploads
+    access: read-write
+  - type: sqs
+    name: email-queue
+    access: write

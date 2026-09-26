@@ -5,4 +5,7 @@ index2.js
 r.rest
 backend.zip
 .dockerignore
-
+cicd.yml
+deploy.yml
+main.yml
+services.yml

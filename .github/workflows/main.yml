@@ -182,10 +182,14 @@ jobs:
         steps:
             - name: "environment variables"
               # FIX: Correct context access to read the cross-job persisted token
-              run: echo "ENVIRONMENT VAR token value is:${{ needs.testing_workflow_variables.outputs.MY_TOKENS }}"
+              run: echo "ENVIRONMENT VAR token value is:${{ var.GITHUB_ENVIRONMENTVARIABLE }}"
 
 
-
+# SO FAR WE HAVE WORKED WITH GITHUB HOSTED RUNNERS
+   # RUNS-ON --> UBUNTU-LATEST
+# OTHER RUNNERS ARE: 
+      # - SELF HOSTED 
+      # - THIRD PARTY RUNNERS
 
 
 

@@ -1,0 +1,22 @@
+name: Build
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+             "backend/**"
+
+jobs:
+    install-packages:
+        runs-on: ubuntu-latest
+        steps:
+            - name: "read repo"
+              uses: actions/checkout@v5
+
+            - name: "install-node"
+              run: |
+                npm ci
+                echo node --version
+                npm run dev
+

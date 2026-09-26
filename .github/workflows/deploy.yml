@@ -1,0 +1,75 @@
+# Read repo
+# Security scan (gitleaks + SAST on source)
+# Install Terraform, read tf files
+# Scan tf for errors (Checkov)
+# Install AWS CLI + authenticate
+# terraform plan
+# terraform apply (provisions/updates infra — ECR repo, ECS cluster, IAM roles, etc.)
+# Build Docker images (frontend + backend)
+# Trivy scan the built images ← new step
+# Push images to ECR
+# Trigger deployment (ECS service update / Lambda code update) ← new step
+name: Build & Deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'services/**'
+      - '!services/**/*.tf'
+      - '!services/**/service.yaml'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [frontend, backend]   
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Scan for secrets (gitleaks)
+        uses: gitleaks/gitleaks-action@v2
+
+      - name: Run tests
+        run: |
+          cd services/${{ matrix.service }}
+          npm ci
+          npm test
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to ECR
+        id: ecr-login
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ matrix.service }}:${{ github.sha }} services/${{ matrix.service }}
+
+      - name: Scan image for vulnerabilities (Trivy)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ matrix.service }}:${{ github.sha }}
+          severity: CRITICAL,HIGH
+          exit-code: 1
+
+      - name: Tag & push image to ECR
+        env:
+          ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
+        run: |
+          docker tag ${{ matrix.service }}:${{ github.sha }} $ECR_REGISTRY/${{ matrix.service }}:${{ github.sha }}
+          docker push $ECR_REGISTRY/${{ matrix.service }}:${{ github.sha }}
+
+      - name: Deploy new image to ECS
+        run: |
+          aws ecs update-service \
+            --cluster my-cluster \
+            --service ${{ matrix.service }}-service \
+            --force-new-deployment
+          
