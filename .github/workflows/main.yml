@@ -43,7 +43,8 @@ jobs:
     
     testing_steps:
         needs: 
-            testing_jobs_variables
+            - testing_workflow_variables
+            - testing_jobs_variables
         env:
           JOB3_VAR: 45677494033827dhfheie
         runs-on: ubuntu-latest
