@@ -20,7 +20,7 @@ jobs:
             # - name: "value itself"
               run: | 
                 mytoken=5994049rjrfhfhr  
-                echo "TOKEN=${mytoken}">>$GITHUB_OUTPUT
+                echo "mytoken=${mytoken}">>$GITHUB_OUTPUT
 
     #JOBS VARIABLES
     testing_jobs_variables:
