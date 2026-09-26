@@ -23,6 +23,8 @@ jobs:
         needs: 
             - scan-packages
         steps:
+            - name: "read repo"
+              uses: actions/checkout@v5
 
             - name: "install-node"
               uses: actions/setup-node@v4
@@ -37,6 +39,11 @@ jobs:
             
             - name: "read packages"
               run: nano package.json
-              
+
             
 
+
+     
+
+       
+             
