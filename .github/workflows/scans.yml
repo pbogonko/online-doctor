@@ -21,7 +21,7 @@ jobs:
                 output: trivy-report.txt
 
             - name: Upload Trivy report as artifact
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
               with:
                 name: trivy-report
                 path: trivy-report.txt
@@ -42,3 +42,4 @@ jobs:
               with:
                 name: gitleaks-report
                 path: gitleaks-report.json
+
