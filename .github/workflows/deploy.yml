@@ -27,8 +27,10 @@ jobs:
         service: [frontend, backend]   
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
-
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - name: Setup Terraform
+        uses: terraform-linters/setup-tflint@90f302c255ef959cbfb4bd10581afecdb7ece3e6
+        
       - name: Scan for secrets (gitleaks)
         uses: gitleaks/gitleaks-action@v2
 
