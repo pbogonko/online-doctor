@@ -64,6 +64,7 @@ jobs:
           SERVER_HOST: ${{ secrets.SERVER_HOST }}
           SERVER_PORT: ${{ secrets.SERVER_PORT }}
           SERVER_PATH: ${{ secrets.SERVER_PATH }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         run: |
           set -euo pipefail
 
@@ -77,6 +78,10 @@ jobs:
           fi
           if [ -z "$SERVER_PATH" ]; then
             echo "::error::SERVER_PATH secret is missing."
+            exit 1
+          fi
+          if [ -z "$DOCKERHUB_USERNAME" ]; then
+            echo "::error::DOCKERHUB_USERNAME secret is missing."
             exit 1
           fi
 
@@ -96,15 +101,29 @@ jobs:
           chmod 644 ~/.ssh/known_hosts
 
           printf -v QUOTED_SERVER_PATH '%q' "$SERVER_PATH"
+          printf -v QUOTED_DOCKERHUB_USERNAME '%q' "$DOCKERHUB_USERNAME"
           echo "Starting remote deployment..."
-          if ! ssh -o BatchMode=yes -o ConnectTimeout=20 -p "$SERVER_PORT" -i ~/.ssh/id_rsa "$SERVER_HOST" "bash -s -- $QUOTED_SERVER_PATH" << 'EOF'
+          if ! ssh -o BatchMode=yes -o ConnectTimeout=20 -p "$SERVER_PORT" -i ~/.ssh/id_rsa "$SERVER_HOST" "bash -s -- $QUOTED_SERVER_PATH $QUOTED_DOCKERHUB_USERNAME" << 'EOF'
             set -euo pipefail
             echo "Connected; checking deployment directory."
             cd -- "$1"
+            export DOCKERHUB_USERNAME="$2"
+            if [ ! -f docker-compose.yml ]; then
+              echo "docker-compose.yml not found in SERVER_PATH."
+              exit 1
+            fi
+            if docker compose version >/dev/null 2>&1; then
+              compose=(docker compose)
+            elif command -v docker-compose >/dev/null 2>&1; then
+              compose=(docker-compose)
+            else
+              echo "Docker Compose is not installed on the server."
+              exit 1
+            fi
             echo "Pulling images."
-            docker-compose pull
+            "${compose[@]}" pull
             echo "Starting services."
-            docker-compose up -d --force-recreate
+            "${compose[@]}" up -d --force-recreate
             docker ps
           EOF
           then
