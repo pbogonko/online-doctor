@@ -8,7 +8,7 @@ function Contact() {
 <div className="px-4 mx-auto max-w-screen-md">
   <h2 className="heading text-center">Contact us</h2>
   <p className="mb-8 lg:mb-16 font-light text-center text_para">
-    got a techinical issue? want to send a feedback about a beta feature? feel free to let us know
+    got a techinical issue? want to send a feedback about a beta feature? feel free to let us know and we will get back to you as soon as possible.
   </p>
   <form action="" className='space-y-8'>
     <div>
