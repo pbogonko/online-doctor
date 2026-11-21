@@ -42,7 +42,8 @@ function Home() {
             <div>
               <div className="lg:w-[570px]">
                 <h1 className="text-[36px] leading-[46px] text-headingColor font-[800] md:text-[60px] md:leading-[70px]">
-                  we save life by helping patients access medical care easily
+                  we save life by helping patients access medical care easily.
+                  get the care you need, when you need it.
                 </h1>
                 <p className="text_para">
                    we bridge the gap between patients and healthcare providers,
