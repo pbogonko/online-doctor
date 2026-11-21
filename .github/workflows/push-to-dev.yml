@@ -54,6 +54,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
           SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_PORT: ${{ secrets.SERVER_PORT }}
           SERVER_PATH: ${{ secrets.SERVER_PATH }}
         run: |
           set -euo pipefail
@@ -78,16 +79,17 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           
           SERVER_ADDRESS="${SERVER_HOST#*@}"
+          SERVER_PORT="${SERVER_PORT:-22}"
           echo "Scanning SSH host key..."
-          if ! ssh-keyscan -T 10 -H "$SERVER_ADDRESS" >> ~/.ssh/known_hosts; then
-            echo "::error::Could not scan SERVER_HOST on port 22. Set it to [user@]hostname-or-IP and verify that SSH is reachable."
+          if ! ssh-keyscan -v -T 10 -p "$SERVER_PORT" -H "$SERVER_ADDRESS" >> ~/.ssh/known_hosts; then
+            echo "::error::Could not scan SERVER_HOST on port $SERVER_PORT. Check that SERVER_HOST is [user@]hostname-or-IP, SERVER_PORT is correct, and the host is reachable from GitHub Actions."
             exit 1
           fi
           chmod 644 ~/.ssh/known_hosts
 
           printf -v QUOTED_SERVER_PATH '%q' "$SERVER_PATH"
           echo "Starting remote deployment..."
-          if ! ssh -o BatchMode=yes -o ConnectTimeout=20 -i ~/.ssh/id_rsa "$SERVER_HOST" "bash -s -- $QUOTED_SERVER_PATH" << 'EOF'
+          if ! ssh -o BatchMode=yes -o ConnectTimeout=20 -p "$SERVER_PORT" -i ~/.ssh/id_rsa "$SERVER_HOST" "bash -s -- $QUOTED_SERVER_PATH" << 'EOF'
             set -euo pipefail
             echo "Connected; checking deployment directory."
             cd -- "$1"
