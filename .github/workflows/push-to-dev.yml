@@ -78,17 +78,29 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           
           SERVER_ADDRESS="${SERVER_HOST#*@}"
-          ssh-keyscan -H "$SERVER_ADDRESS" >> ~/.ssh/known_hosts
+          echo "Scanning SSH host key..."
+          if ! ssh-keyscan -T 10 -H "$SERVER_ADDRESS" >> ~/.ssh/known_hosts; then
+            echo "::error::Could not scan SERVER_HOST on port 22. Set it to [user@]hostname-or-IP and verify that SSH is reachable."
+            exit 1
+          fi
           chmod 644 ~/.ssh/known_hosts
-          echo "server path:$SERVER_PATH"
+
           printf -v QUOTED_SERVER_PATH '%q' "$SERVER_PATH"
-          ssh -i ~/.ssh/id_rsa "$SERVER_HOST" "bash -s -- $QUOTED_SERVER_PATH" << 'EOF'
+          echo "Starting remote deployment..."
+          if ! ssh -o BatchMode=yes -o ConnectTimeout=20 -i ~/.ssh/id_rsa "$SERVER_HOST" "bash -s -- $QUOTED_SERVER_PATH" << 'EOF'
             set -euo pipefail
+            echo "Connected; checking deployment directory."
             cd -- "$1"
+            echo "Pulling images."
             docker-compose pull
+            echo "Starting services."
             docker-compose up -d --force-recreate
             docker ps
           EOF
+          then
+            echo "::error::SSH or remote deployment failed. Inspect the SSH/Compose output above."
+            exit 1
+          fi
 
         
   
