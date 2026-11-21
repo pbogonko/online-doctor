@@ -87,7 +87,7 @@ function Login() {
             <Button
               type="submit"
               className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-2 shadow-md hover:bg-primaryColor-dark transition duration-10"
-            name={loading? <HashLoader size={35} color={'#ffffff'}/>:'Login'}/>
+            name={loading? <HashLoader size={35} color={'#a84646'}/>:'Login'}/>
             
           </div>
           <p className="mt-4 text-textColor text-center">
