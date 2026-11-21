@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  backend:
+    image: backend:dev
+    container_name: backend-dev
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    networks:
+      - app_network
+    restart: unless-stopped
+
+  frontend:
+    image: frontend:dev
+    container_name: frontend-dev
+    ports:
+      - "192.168.0.110:8080:80"  # Different port to avoid conflict with prod/staging
+    networks:
+      - app_network
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+networks:
+  app_network:
+    driver: bridge

@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  backend:
+    image: backend:v1.0
+    container_name: backend-prod
+    env_file:
+      - .env
+    networks:
+      - app_network
+    restart: unless-stopped
+
+  frontend:
+    image: frontend:v1.0
+    container_name: frontend-prod
+    ports:
+      - "192.168.0.110:80:80"
+    networks:
+      - app_network
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+networks:
+  app_network:
+    driver: bridge
+
+
+    router A:-----internet---->router B
+        server            client

@@ -1,0 +1,66 @@
+name: push-to-dev
+on:
+  push:
+    branches:
+      - main
+jobs:
+  push-to-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push backend image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          push: true
+          tags: your-dockerhub-username/backend:dev
+
+      - name: Build and push frontend image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile
+          push: true
+          tags: your-dockerhub-username/frontend:dev
+
+      - name: Deploy to development server
+  
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+        run: |
+          # .ssh directory with correct permissions
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+
+          # 2. Add the private key to the SSH agent
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+          #  Add server host key automatically to prevent prompts
+          ssh-keyscan -H "$SERVER_HOST" >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+          # Execute remote commands securely
+          ssh -i ~/.ssh/id_rsa "$SERVER_HOST" << 'EOF'
+            echo "Successfully logged into server!"
+            cd ${secrets.SERVER_PATH}
+            docker-compose down
+            docker-compose pull
+            docker-compose up -d --force-recreate
+          EOF
+
+        
+  
