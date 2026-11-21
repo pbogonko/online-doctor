@@ -73,20 +73,21 @@ jobs:
 
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-
+          
           printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-
+          
           SERVER_ADDRESS="${SERVER_HOST#*@}"
           ssh-keyscan -H "$SERVER_ADDRESS" >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
-
+          echo "server path:$SERVER_PATH"
           printf -v QUOTED_SERVER_PATH '%q' "$SERVER_PATH"
           ssh -i ~/.ssh/id_rsa "$SERVER_HOST" "bash -s -- $QUOTED_SERVER_PATH" << 'EOF'
             set -euo pipefail
             cd -- "$1"
             docker-compose pull
             docker-compose up -d --force-recreate
+            docker ps
           EOF
 
         
