@@ -77,10 +77,10 @@ jobs:
           printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           
-          SERVER_ADDRESS="${SERVER_HOST}"
+          SERVER_ADDRESS="${SERVER_HOST#*@}"
           echo "Scanning SSH host key..."
           if ! ssh-keyscan -T 10 -H "$SERVER_ADDRESS" >> ~/.ssh/known_hosts; then
-            echo "::error::Could not scan SERVER_HOST on port 22. Set it to [user@]hostname-or-IP and verify that SSH is reachable. visible host: $SERVER_ADDRESS"
+            echo "::error::Could not scan SERVER_HOST on port 22. Set it to [user@]hostname-or-IP and verify that SSH is reachable."
             exit 1
           fi
           chmod 644 ~/.ssh/known_hosts
