@@ -108,8 +108,28 @@ jobs:
             echo "Connected; checking deployment directory."
             cd -- "$1"
             export DOCKERHUB_USERNAME="$2"
-            if [ ! -f docker-compose.yaml ]; then
-              echo "docker-compose.yaml not found in SERVER_PATH."
+            if [ ! -f docker-compose.yml ] && [ ! -f docker-compose.yaml ] && [ ! -f compose.yml ] && [ ! -f compose.yaml ]; then
+              echo "No Docker Compose file found in SERVER_PATH."
+              exit 1
+            fi
+            if ! docker info >/dev/null 2>&1; then
+              echo "Starting Docker Desktop..."
+              if ! docker desktop start; then
+                echo "Could not start Docker Desktop for the SSH user."
+                exit 1
+              fi
+            fi
+            echo "Waiting for Docker Engine..."
+            engine_ready=false
+            for attempt in {1..30}; do
+              if docker info >/dev/null 2>&1; then
+                engine_ready=true
+                break
+              fi
+              sleep 2
+            done
+            if [ "$engine_ready" != true ]; then
+              echo "Docker Engine did not become ready after 60 seconds."
               exit 1
             fi
             if docker compose version >/dev/null 2>&1; then
