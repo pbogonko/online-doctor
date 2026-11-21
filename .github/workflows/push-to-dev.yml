@@ -25,7 +25,7 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/backend:dev
+          tags: "${{ secrets.DOCKER_USERNAME }}backend:dev"
 
       - name: Build and push frontend image
         uses: docker/build-push-action@v5
@@ -33,7 +33,7 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/frontend:dev
+          tags: "${{ secrets.DOCKER_USERNAME }}frontend:dev"
 
       - name: Deploy to development server
   
