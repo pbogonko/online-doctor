@@ -108,8 +108,8 @@ jobs:
             echo "Connected; checking deployment directory."
             cd -- "$1"
             export DOCKERHUB_USERNAME="$2"
-            if [ ! -f docker-compose.yml ]; then
-              echo "docker-compose.yml not found in SERVER_PATH."
+            if [ ! -f docker-compose.yaml ]; then
+              echo "docker-compose.yaml not found in SERVER_PATH."
               exit 1
             fi
             if docker compose version >/dev/null 2>&1; then
