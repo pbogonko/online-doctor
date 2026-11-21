@@ -54,24 +54,37 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
           SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_PATH: ${{ secrets.SERVER_PATH }}
         run: |
-          # .ssh directory with correct permissions
+          set -euo pipefail
+
+          if [ -z "$SSH_PRIVATE_KEY" ]; then
+            echo "::error::SSH_KEY secret is missing."
+            exit 1
+          fi
+          if [ -z "$SERVER_HOST" ]; then
+            echo "::error::SERVER_HOST secret is missing."
+            exit 1
+          fi
+          if [ -z "$SERVER_PATH" ]; then
+            echo "::error::SERVER_PATH secret is missing."
+            exit 1
+          fi
+
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
 
-          # 2. Add the private key to the SSH agent
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
-          #  Add server host key automatically to prevent prompts
-          ssh-keyscan -H "$SERVER_HOST" >> ~/.ssh/known_hosts
+          SERVER_ADDRESS="${SERVER_HOST#*@}"
+          ssh-keyscan -H "$SERVER_ADDRESS" >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
 
-          # Execute remote commands securely
-          ssh -i ~/.ssh/id_rsa "$SERVER_HOST" << 'EOF'
-            echo "Successfully logged into server!"
-            cd ${secrets.SERVER_PATH}
-            docker-compose down
+          printf -v QUOTED_SERVER_PATH '%q' "$SERVER_PATH"
+          ssh -i ~/.ssh/id_rsa "$SERVER_HOST" "bash -s -- $QUOTED_SERVER_PATH" << 'EOF'
+            set -euo pipefail
+            cd -- "$1"
             docker-compose pull
             docker-compose up -d --force-recreate
           EOF
