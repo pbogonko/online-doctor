@@ -15,7 +15,7 @@ jobs:
 
       - name: Validate DockerHub credentials
         env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
           if [ -z "$DOCKER_USERNAME" ]; then
